@@ -1,4 +1,5 @@
-/* Floating Download Button */
+/* Floating Download Button - REMOVED */
+/* Commented out as requested
 .floating-download {
   position: fixed;
   bottom: 30px;
@@ -63,7 +64,6 @@
   }
 }
 
-/* Hide on mobile */
 @media (max-width: 768px) {
   .floating-download {
     bottom: 20px;
@@ -75,6 +75,7 @@
     font-size: 14px;
   }
 }
+*/ /* End of commented floating download button */
 
 /* Download Info Box */
 .download-info-box {

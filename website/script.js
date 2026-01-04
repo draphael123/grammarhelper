@@ -302,28 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Floating download button visibility
-  const floatingDownload = document.getElementById('floatingDownload');
-  let lastScroll = 0;
-
-  window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    
-    // Show after scrolling 300px
-    if (currentScroll > 300) {
-      floatingDownload.style.display = 'block';
-      floatingDownload.style.opacity = '1';
-    } else {
-      floatingDownload.style.opacity = '0';
-      setTimeout(() => {
-        if (window.pageYOffset <= 300) {
-          floatingDownload.style.display = 'none';
-        }
-      }, 300);
-    }
-    
-    lastScroll = currentScroll;
-  });
+  // Floating download button removed
 
   // Track download clicks
   const downloadButtons = document.querySelectorAll('a[download], a[href*="github.com"]');
@@ -394,11 +373,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 5000);
   }
 
-  // Initial hide for floating button
-  if (floatingDownload) {
-    floatingDownload.style.display = 'none';
-    floatingDownload.style.transition = 'opacity 0.3s ease';
-  }
+  // Floating button removed
 
   // FAQ Accordion
   const faqItems = document.querySelectorAll('.faq-item');
