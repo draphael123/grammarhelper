@@ -429,17 +429,37 @@ document.addEventListener('DOMContentLoaded', () => {
   const sampleText = "Their are many benefits to using GrammarGuard for you're writing needs. Its a great tool that helps catch alot of common mistakes. We recieved positive feedback from users who says it makes their writing better.  Weather your a student or professional,GrammarGuard can help you write more good.";
 
   const grammarRules = [
+    // Common misspellings
+    { pattern: /\bteh\b/gi, type: 'spelling', message: 'Use "the"' },
+    { pattern: /\bthi\b/gi, type: 'spelling', message: 'Use "this"' },
+    { pattern: /\bthsi\b/gi, type: 'spelling', message: 'Use "this"' },
+    { pattern: /\bia\b/gi, type: 'spelling', message: 'Use "is" or "a"' },
+    { pattern: /\bsiad\b/gi, type: 'spelling', message: 'Use "said"' },
+    { pattern: /\bwere\s+is\b/gi, type: 'grammar', message: 'Use "where is"' },
     { pattern: /\btheir\s+are\b/gi, type: 'grammar', message: 'Use "There are"' },
     { pattern: /\byour\s+going\b/gi, type: 'grammar', message: 'Use "you\'re going"' },
     { pattern: /\byou're\s+writing\b/gi, type: 'grammar', message: 'Use "your writing"' },
+    { pattern: /\byour\s+welcome\b/gi, type: 'grammar', message: 'Use "you\'re welcome"' },
     { pattern: /\bits\s+a\b/gi, type: 'grammar', message: 'Use "it\'s" (it is)' },
     { pattern: /\balot\b/gi, type: 'spelling', message: 'Use "a lot"' },
     { pattern: /\brecieved\b/gi, type: 'spelling', message: 'Use "received"' },
-    { pattern: /\bsays\b/gi, type: 'grammar', message: 'Use "say"' },
-    { pattern: /\bweather\b/gi, type: 'spelling', message: 'Use "whether"' },
+    { pattern: /\bsays\b(?=\s+(it|that|we|they))/gi, type: 'grammar', message: 'Use "say"' },
+    { pattern: /\bweather\b(?=\s+your?)/gi, type: 'spelling', message: 'Use "whether"' },
+    { pattern: /\bwich\b/gi, type: 'spelling', message: 'Use "which"' },
+    { pattern: /\bthier\b/gi, type: 'spelling', message: 'Use "their"' },
+    { pattern: /\bwierd\b/gi, type: 'spelling', message: 'Use "weird"' },
+    { pattern: /\bdefinate\b/gi, type: 'spelling', message: 'Use "definite"' },
+    { pattern: /\bdefinately\b/gi, type: 'spelling', message: 'Use "definitely"' },
+    { pattern: /\bseperate\b/gi, type: 'spelling', message: 'Use "separate"' },
+    { pattern: /\boccurence\b/gi, type: 'spelling', message: 'Use "occurrence"' },
+    { pattern: /\bshould of\b/gi, type: 'grammar', message: 'Use "should have"' },
+    { pattern: /\bcould of\b/gi, type: 'grammar', message: 'Use "could have"' },
+    { pattern: /\bwould of\b/gi, type: 'grammar', message: 'Use "would have"' },
+    { pattern: /\bto\s+(much|many)\b/gi, type: 'grammar', message: 'Use "too"' },
     { pattern: /,(\w)/g, type: 'spacing', message: 'Add space after comma' },
     { pattern: /\s{2,}/g, type: 'spacing', message: 'Extra space' },
-    { pattern: /\bmore\s+good\b/gi, type: 'grammar', message: 'Use "better"' }
+    { pattern: /\bmore\s+good\b/gi, type: 'grammar', message: 'Use "better"' },
+    { pattern: /(^|[.!?]\s+)([a-z])/g, type: 'capitalization', message: 'Capitalize first letter' }
   ];
 
   function checkGrammar(text) {
@@ -463,12 +483,26 @@ document.addEventListener('DOMContentLoaded', () => {
   function highlightErrors() {
     if (!liveEditor) return;
     
-    let text = liveEditor.textContent;
+    const text = liveEditor.textContent || liveEditor.innerText || '';
+    
+    // Update word count
+    const wordCount = text.trim().split(/\s+/).filter(w => w.length > 0).length;
+    if (wordsCountEl) wordsCountEl.textContent = wordCount;
+    
+    // If text is empty, reset
+    if (!text.trim()) {
+      if (errorsCountEl) errorsCountEl.textContent = '0';
+      if (wordsCountEl) wordsCountEl.textContent = '0';
+      return;
+    }
+    
     const errors = checkGrammar(text);
     
-    if (!errorsVisible) {
-      liveEditor.textContent = text;
-      errorsCountEl.textContent = '0';
+    // Update error count
+    if (errorsCountEl) errorsCountEl.textContent = errors.length;
+    
+    if (!errorsVisible || errors.length === 0) {
+      liveEditor.innerHTML = text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
       return;
     }
 
@@ -481,15 +515,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const before = html.substring(0, error.start);
       const errorText = html.substring(error.start, error.end);
       const after = html.substring(error.end);
-      html = before + `<span class="error-highlight" title="${error.message}">${errorText}</span>` + after;
+      html = before + `<mark class="error-highlight" title="${error.message}" style="background-color: rgba(245, 158, 11, 0.3); padding: 2px 4px; border-radius: 3px; cursor: help; border-bottom: 2px dotted #f59e0b;">${errorText}</mark>` + after;
     });
     
     liveEditor.innerHTML = html;
-    errorsCountEl.textContent = errors.length;
-    
-    // Update word count
-    const wordCount = text.trim().split(/\s+/).filter(w => w.length > 0).length;
-    wordsCountEl.textContent = wordCount;
   }
 
   if (loadSampleBtn) {
@@ -517,12 +546,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (liveEditor) {
     let debounceTimer;
+    
+    // Handle input with debounce
     liveEditor.addEventListener('input', () => {
       clearTimeout(debounceTimer);
       debounceTimer = setTimeout(() => {
         highlightErrors();
-      }, 500);
+      }, 300);
     });
+    
+    // Also handle paste events
+    liveEditor.addEventListener('paste', (e) => {
+      setTimeout(() => {
+        highlightErrors();
+      }, 100);
+    });
+    
+    // Initial check if there's content
+    if (liveEditor.textContent) {
+      highlightErrors();
+    }
   }
 
   // Fetch GitHub Stars

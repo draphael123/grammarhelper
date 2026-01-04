@@ -599,11 +599,20 @@
   pointer-events: none;
 }
 
-.live-editor .error-highlight {
-  background: rgba(245, 158, 11, 0.2);
-  border-bottom: 2px dotted #f59e0b;
-  cursor: pointer;
-  padding: 2px 0;
+.live-editor .error-highlight,
+.live-editor mark.error-highlight {
+  background: rgba(245, 158, 11, 0.3) !important;
+  border-bottom: 2px dotted #f59e0b !important;
+  cursor: help !important;
+  padding: 2px 4px !important;
+  border-radius: 3px !important;
+  color: inherit !important;
+  transition: background-color 0.2s;
+}
+
+.live-editor .error-highlight:hover,
+.live-editor mark.error-highlight:hover {
+  background: rgba(245, 158, 11, 0.5) !important;
 }
 
 .demo-stats {
