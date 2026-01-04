@@ -719,8 +719,215 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 16);
   }
 
+  // === CONTACT FORM HANDLING ===
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerHTML;
+      
+      // Show loading state
+      submitBtn.classList.add('loading');
+      submitBtn.disabled = true;
+      
+      // Get form data
+      const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        subject: document.getElementById('subject').value,
+        message: document.getElementById('message').value,
+        timestamp: new Date().toISOString()
+      };
+      
+      // Simulate form submission (replace with actual API call)
+      setTimeout(() => {
+        console.log('Contact form submitted:', formData);
+        
+        // Show success message
+        const successMsg = document.createElement('div');
+        successMsg.className = 'form-success';
+        successMsg.textContent = '✅ Thank you! Your message has been sent. We\'ll get back to you soon!';
+        contactForm.insertBefore(successMsg, contactForm.firstChild);
+        
+        // Reset form
+        contactForm.reset();
+        
+        // Reset button
+        submitBtn.classList.remove('loading');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+        
+        // Remove success message after 5 seconds
+        setTimeout(() => successMsg.remove(), 5000);
+      }, 1500);
+    });
+  }
+  
+  // === SUGGESTION FORM HANDLING ===
+  const suggestionForm = document.getElementById('suggestionForm');
+  const suggestionsList = document.getElementById('suggestionsList');
+  
+  if (suggestionForm) {
+    suggestionForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const title = document.getElementById('suggestionTitle').value;
+      const description = document.getElementById('suggestionDescription').value;
+      const category = document.getElementById('suggestionCategory').value;
+      
+      // Create new suggestion item
+      const suggestionItem = createSuggestionItem({
+        title: title,
+        description: description,
+        category: category,
+        votes: 1,
+        date: 'Just now'
+      });
+      
+      // Add to list at the top
+      suggestionsList.insertBefore(suggestionItem, suggestionsList.firstChild);
+      
+      // Reset form
+      suggestionForm.reset();
+      
+      // Show success message
+      const successMsg = document.createElement('div');
+      successMsg.className = 'form-success';
+      successMsg.textContent = '✅ Your suggestion has been submitted!';
+      suggestionForm.insertBefore(successMsg, suggestionForm.firstChild);
+      
+      // Remove success message after 3 seconds
+      setTimeout(() => successMsg.remove(), 3000);
+      
+      // Log the suggestion
+      console.log('New suggestion submitted:', { title, description, category });
+    });
+  }
+  
+  // === VOTING FUNCTIONALITY ===
+  function setupVoting() {
+    const voteButtons = document.querySelectorAll('.vote-btn');
+    
+    voteButtons.forEach(btn => {
+      btn.addEventListener('click', function() {
+        const voteCount = this.nextElementSibling;
+        const currentVotes = parseInt(voteCount.textContent);
+        
+        if (this.classList.contains('voted')) {
+          // Unvote
+          this.classList.remove('voted');
+          voteCount.textContent = currentVotes - 1;
+        } else {
+          // Vote
+          this.classList.add('voted');
+          voteCount.textContent = currentVotes + 1;
+          
+          // Animate
+          voteCount.style.transform = 'scale(1.3)';
+          setTimeout(() => {
+            voteCount.style.transform = 'scale(1)';
+          }, 200);
+        }
+      });
+    });
+  }
+  
+  setupVoting();
+  
+  // === FILTER FUNCTIONALITY ===
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      // Remove active class from all buttons
+      filterButtons.forEach(b => b.classList.remove('active'));
+      
+      // Add active class to clicked button
+      this.classList.add('active');
+      
+      const filter = this.dataset.filter;
+      const suggestions = document.querySelectorAll('.suggestion-item');
+      
+      if (filter === 'all') {
+        suggestions.forEach(s => s.style.display = 'flex');
+      } else if (filter === 'popular') {
+        // Sort by votes (high to low)
+        const sortedSuggestions = Array.from(suggestions).sort((a, b) => {
+          const votesA = parseInt(a.querySelector('.vote-count').textContent);
+          const votesB = parseInt(b.querySelector('.vote-count').textContent);
+          return votesB - votesA;
+        });
+        
+        suggestionsList.innerHTML = '';
+        sortedSuggestions.forEach(s => suggestionsList.appendChild(s));
+      } else if (filter === 'recent') {
+        // Show all in original order
+        suggestions.forEach(s => s.style.display = 'flex');
+      }
+    });
+  });
+  
+  // === HELPER FUNCTION TO CREATE SUGGESTION ITEM ===
+  function createSuggestionItem(data) {
+    const item = document.createElement('div');
+    item.className = 'suggestion-item';
+    item.dataset.category = data.category;
+    
+    item.innerHTML = `
+      <div class="suggestion-vote">
+        <button class="vote-btn">▲</button>
+        <span class="vote-count">${data.votes}</span>
+      </div>
+      <div class="suggestion-content">
+        <h4>${data.title}</h4>
+        <p>${data.description}</p>
+        <div class="suggestion-meta">
+          <span class="category-badge ${data.category}">${getCategoryLabel(data.category)}</span>
+          <span class="suggestion-date">${data.date}</span>
+        </div>
+      </div>
+    `;
+    
+    // Setup voting for the new item
+    const voteBtn = item.querySelector('.vote-btn');
+    const voteCount = item.querySelector('.vote-count');
+    
+    voteBtn.addEventListener('click', function() {
+      const currentVotes = parseInt(voteCount.textContent);
+      
+      if (this.classList.contains('voted')) {
+        this.classList.remove('voted');
+        voteCount.textContent = currentVotes - 1;
+      } else {
+        this.classList.add('voted');
+        voteCount.textContent = currentVotes + 1;
+        voteCount.style.transform = 'scale(1.3)';
+        setTimeout(() => {
+          voteCount.style.transform = 'scale(1)';
+        }, 200);
+      }
+    });
+    
+    return item;
+  }
+  
+  function getCategoryLabel(category) {
+    const labels = {
+      'grammar': 'Grammar Rules',
+      'ui': 'User Interface',
+      'performance': 'Performance',
+      'language': 'Language Support',
+      'integration': 'Integrations',
+      'other': 'Other'
+    };
+    return labels[category] || category;
+  }
+
   console.log('GrammarGuard website loaded successfully! ✓');
   console.log('🚀 Ready for downloads!');
   console.log('✨ Interactive features enabled!');
+  console.log('📝 Forms and suggestion board ready!');
 });
 

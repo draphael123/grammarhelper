@@ -34,6 +34,7 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="download-section.css">
   <link rel="stylesheet" href="new-sections.css">
+  <link rel="stylesheet" href="forms-suggestions.css">
 </head>
 <body>
   <!-- Navigation -->
@@ -946,7 +947,208 @@
     </div>
   </section>
 
+  <!-- Contact & Feedback Form Section -->
+  <section class="contact-form-section">
+    <div class="container">
+      <h2 class="section-title">Get in Touch</h2>
+      <p class="section-subtitle">Have questions, feedback, or need support? We'd love to hear from you!</p>
+      
+      <div class="form-container">
+        <form id="contactForm" class="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Name *</label>
+              <input type="text" id="name" name="name" required placeholder="Your name">
+            </div>
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" required placeholder="your@email.com">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="subject">Subject *</label>
+            <select id="subject" name="subject" required>
+              <option value="">Select a topic...</option>
+              <option value="feedback">General Feedback</option>
+              <option value="bug">Bug Report</option>
+              <option value="feature">Feature Request</option>
+              <option value="support">Technical Support</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea id="message" name="message" required placeholder="Tell us what's on your mind..." rows="6"></textarea>
+          </div>
+          
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn-large">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+              Send Message
+            </button>
+          </div>
+        </form>
+        
+        <div class="contact-info">
+          <div class="info-card">
+            <div class="info-icon">📧</div>
+            <h3>Email Us</h3>
+            <p>support@grammarguard.com</p>
+          </div>
+          
+          <div class="info-card">
+            <div class="info-icon">💬</div>
+            <h3>Community</h3>
+            <p>Join our Discord server for discussions and quick help!</p>
+          </div>
+          
+          <div class="info-card">
+            <div class="info-icon">🐛</div>
+            <h3>Report Issues</h3>
+            <p>Found a bug? Report it on our GitHub Issues page.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Suggestion Board Section -->
+  <section class="suggestion-board-section">
+    <div class="container">
+      <h2 class="section-title">Feature Suggestions</h2>
+      <p class="section-subtitle">Help shape the future of GrammarGuard! Share your ideas and vote on suggestions.</p>
+      
+      <div class="suggestion-container">
+        <!-- Submit Suggestion Form -->
+        <div class="suggestion-form-card">
+          <h3>💡 Submit Your Idea</h3>
+          <form id="suggestionForm" class="suggestion-form">
+            <div class="form-group">
+              <input type="text" id="suggestionTitle" name="title" required placeholder="Brief title of your suggestion">
+            </div>
+            
+            <div class="form-group">
+              <textarea id="suggestionDescription" name="description" required placeholder="Describe your idea in detail..." rows="4"></textarea>
+            </div>
+            
+            <div class="form-group">
+              <select id="suggestionCategory" name="category" required>
+                <option value="">Category...</option>
+                <option value="grammar">Grammar Rules</option>
+                <option value="ui">User Interface</option>
+                <option value="performance">Performance</option>
+                <option value="language">Language Support</option>
+                <option value="integration">Integrations</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">
+              ➕ Submit Suggestion
+            </button>
+          </form>
+        </div>
+        
+        <!-- Suggestions List -->
+        <div class="suggestions-list">
+          <div class="suggestions-header">
+            <h3>🔥 Popular Suggestions</h3>
+            <div class="filter-buttons">
+              <button class="filter-btn active" data-filter="all">All</button>
+              <button class="filter-btn" data-filter="popular">Most Voted</button>
+              <button class="filter-btn" data-filter="recent">Recent</button>
+            </div>
+          </div>
+          
+          <div id="suggestionsList" class="suggestions-items">
+            <!-- Sample suggestions -->
+            <div class="suggestion-item" data-category="language">
+              <div class="suggestion-vote">
+                <button class="vote-btn">▲</button>
+                <span class="vote-count">42</span>
+              </div>
+              <div class="suggestion-content">
+                <h4>Add Spanish Language Support</h4>
+                <p>Would love to see Spanish grammar checking alongside English and Filipino!</p>
+                <div class="suggestion-meta">
+                  <span class="category-badge language">Language Support</span>
+                  <span class="suggestion-date">2 days ago</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="suggestion-item" data-category="ui">
+              <div class="suggestion-vote">
+                <button class="vote-btn">▲</button>
+                <span class="vote-count">38</span>
+              </div>
+              <div class="suggestion-content">
+                <h4>Dark Mode for Extension Popup</h4>
+                <p>A dark theme option would be great for night-time writing sessions.</p>
+                <div class="suggestion-meta">
+                  <span class="category-badge ui">User Interface</span>
+                  <span class="suggestion-date">5 days ago</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="suggestion-item" data-category="integration">
+              <div class="suggestion-vote">
+                <button class="vote-btn">▲</button>
+                <span class="vote-count">31</span>
+              </div>
+              <div class="suggestion-content">
+                <h4>Microsoft Word Integration</h4>
+                <p>Add support for Microsoft Word documents through an add-in.</p>
+                <div class="suggestion-meta">
+                  <span class="category-badge integration">Integrations</span>
+                  <span class="suggestion-date">1 week ago</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="suggestion-item" data-category="grammar">
+              <div class="suggestion-vote">
+                <button class="vote-btn">▲</button>
+                <span class="vote-count">27</span>
+              </div>
+              <div class="suggestion-content">
+                <h4>Formal vs Casual Writing Modes</h4>
+                <p>Option to switch between formal business writing and casual conversational tone.</p>
+                <div class="suggestion-meta">
+                  <span class="category-badge grammar">Grammar Rules</span>
+                  <span class="suggestion-date">1 week ago</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="suggestion-item" data-category="performance">
+              <div class="suggestion-vote">
+                <button class="vote-btn">▲</button>
+                <span class="vote-count">19</span>
+              </div>
+              <div class="suggestion-content">
+                <h4>Offline Mode Support</h4>
+                <p>Allow the extension to work without an internet connection.</p>
+                <div class="suggestion-meta">
+                  <span class="category-badge performance">Performance</span>
+                  <span class="suggestion-date">2 weeks ago</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA Section -->
+  <section class="cta-section">
     <div class="container">
       <h2>Ready to Write Better?</h2>
       <p>Join thousands of users who write with confidence using GrammarGuard</p>
