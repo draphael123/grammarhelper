@@ -2,6 +2,88 @@
 
 All notable changes to GrammarGuard will be documented in this file.
 
+## [2.1.0] - 2026-01-03
+
+### 🇵🇭 Filipino Language Support - Major Feature!
+
+#### Added
+- **Full Filipino/Tagalog Language Support**: Comprehensive grammar and spelling checking for Filipino
+  - 35+ Filipino-specific grammar rules
+  - Automatic language detection (English, Filipino, or mixed)
+  - Bilingual mode for Taglish (mixed English-Filipino)
+  - Filipino error messages and explanations
+  
+- **Filipino Grammar Rules**:
+  - **Ng vs Nang** - Proper usage detection and correction
+  - **Din vs Rin / Daw vs Raw** - Phonetic-based suggestions
+  - **Prefix Spacing** - Detects improper spacing in affixes (nag-, pag-, pinaka-, ka-...-an)
+  - **Redundancy Detection** - Catches repeated words (mga mga → mga, ng ng → ng)
+  - **May vs Mayroon** - Context-aware pronoun usage
+  - **Common Misspellings** - kase → kasi, and more
+  - **Hyphenation** - Proper use of hyphens (pag-asa)
+  - **Capitalization** - First letter of sentences
+  - **Spacing** - Extra space removal
+  
+- **Language Detection**:
+  - Automatic language detection based on text markers
+  - Manual language selection in settings (English, Filipino, Both, Auto)
+  - Mixed-language (Taglish) support
+  - Real-time language switching
+  
+- **Website Updates**:
+  - New language feature card highlighting bilingual support
+  - Language selector in interactive demo (🇺🇸 English / 🇵🇭 Filipino)
+  - Filipino sample text for testing
+  - Separate rule sets for each language
+  
+- **Documentation**:
+  - **FILIPINO-SUPPORT.md** - Comprehensive Filipino feature guide
+  - Updated README.md with bilingual support information
+  - Filipino grammar rules documentation
+  - Usage examples and comparisons
+
+#### Technical Details
+- **New Files**:
+  - `filipino-rules.js` - 35+ Filipino grammar patterns
+  - `language-detector.js` - Marker-based language detection
+  - `FILIPINO-SUPPORT.md` - Complete documentation
+  
+- **Modified Files**:
+  - `content-enhanced.js` - Multi-language rule selection
+  - `manifest.json` - Added new script files
+  - `options.html/js` - Language selection UI
+  - `background.js` - Language preference storage
+  - `website/index.html` - Language feature showcase
+  - `website/script.js` - Demo language switching
+  - `website/new-sections.css` - Language selector styling
+  
+- **Language Detection Algorithm**:
+  - Scans for Filipino markers (ang, ng, mga, ko, mo, niya, etc.)
+  - Scans for English markers (the, is, are, was, were, etc.)
+  - Calculates language scores
+  - Returns dominant language or "both" for mixed text
+
+#### Performance
+- Zero latency - Same speed as English checking
+- No server calls - All processing local
+- Privacy-first - Text never leaves device
+
+#### Supported Platforms
+Filipino checking works everywhere:
+- Facebook, Twitter/X, Instagram
+- Gmail, Outlook, Yahoo Mail
+- Google Docs, Microsoft 365
+- Slack, Discord, WhatsApp Web
+- LinkedIn, Reddit
+- Any website with text input!
+
+### 📚 Resources
+- Full documentation: `FILIPINO-SUPPORT.md`
+- Try it live: https://grammarguard.vercel.app (select 🇵🇭 Filipino in demo)
+- GitHub: https://github.com/draphael123/grammarhelper
+
+---
+
 ## [1.1.0] - 2026-01-03
 
 ### 🎉 Major Website Overhaul
@@ -135,6 +217,6 @@ We welcome contributions! See our [GitHub repository](https://github.com/draphae
 
 **Website**: https://grammarguard.vercel.app  
 **Repository**: https://github.com/draphael123/grammarhelper  
-**Version**: 1.1.0  
+**Version**: 2.1.0  
 **Last Updated**: January 3, 2026
 

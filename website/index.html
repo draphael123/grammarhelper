@@ -201,6 +201,18 @@
           <h3>Lightning Fast</h3>
           <p>Optimized for performance. No lag, no delays - just instant, accurate corrections.</p>
         </div>
+
+        <div class="feature-card">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 100%);">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+          </div>
+          <h3>🇺🇸 English + 🇵🇭 Filipino</h3>
+          <p>Bilingual support! Check grammar and spelling in English, Filipino (Tagalog), or both simultaneously. Auto-detects language.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -906,6 +918,10 @@
       
       <div class="live-demo-container">
         <div class="demo-controls">
+          <select id="languageSelector" class="language-selector">
+            <option value="english">🇺🇸 English</option>
+            <option value="filipino">🇵🇭 Filipino (Tagalog)</option>
+          </select>
           <button class="demo-btn" id="loadSample">Load Sample Text</button>
           <button class="demo-btn" id="clearText">Clear</button>
           <button class="demo-btn" id="toggleErrors">

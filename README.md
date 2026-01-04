@@ -7,12 +7,15 @@
 
 ## Overview
 
-GrammarGuard is a powerful Chrome extension that works just like Grammarly, providing real-time grammar, spelling, and style checking across all websites. Write with confidence everywhere you go online!
+GrammarGuard is a powerful Chrome extension that works just like Grammarly, providing real-time grammar, spelling, and style checking across all websites. **Now with full Filipino (Tagalog) language support!** Write with confidence in English, Filipino, or both!
+
+🆕 **NEW in v2.1**: Comprehensive Filipino/Tagalog grammar checking with 35+ rules, auto-detection, and bilingual support!
 
 ## Features
 
 - ✅ **Real-Time Checking** - Get instant feedback as you type
 - 🌐 **Works Everywhere** - Compatible with Gmail, Twitter, Google Docs, Facebook, and more
+- 🇺🇸🇵🇭 **Bilingual Support** - **NEW!** English + Filipino (Tagalog) with auto-detection
 - 📝 **Grammar & Spelling** - Advanced detection of grammar mistakes and spelling errors
 - 🎨 **Style Suggestions** - Improve readability and tone
 - 🔒 **Privacy First** - All checking happens locally on your device
@@ -20,24 +23,45 @@ GrammarGuard is a powerful Chrome extension that works just like Grammarly, prov
 
 ## What We Check
 
-### Spelling Errors
+### 🇺🇸 English Language
+**Spelling Errors:**
 - Misspelled words
 - Common typos (teh → the, recieve → receive)
 - Word confusions (their/there/they're, your/you're)
-- Multiple spelling variations
 
-### Grammar Mistakes
+**Grammar Mistakes:**
 - Subject-verb agreement
 - Incorrect word usage
 - Sentence structure issues
 - Verb tense errors
 - Pronoun usage
 
-### Style & Formatting
+**Style & Formatting:**
 - Punctuation placement
 - Capitalization rules
 - Spacing issues (double spaces, missing spaces)
 - Readability enhancements
+
+### 🇵🇭 Filipino/Tagalog Language **NEW!**
+**Grammar Rules (35+ patterns):**
+- **Ng vs Nang** - Proper usage detection
+- **Din vs Rin / Daw vs Raw** - Automatic phonetic matching
+- **Prefix Spacing** - Correct attachment (nag-, pag-, pinaka-, ka-...-an)
+- **Redundancy** - Catches repeated words (mga mga → mga)
+- **May vs Mayroon** - Context-aware suggestions
+
+**Common Corrections:**
+- Prefix attachment: `pag dating` → `pagdating`
+- Spelling: `kase` → `kasi`
+- Grammar: `gusto ko nang` → `gusto ko ng`
+- Hyphenation: `pag asa` → `pag-asa`
+
+**Bilingual (Taglish) Support:**
+- Checks mixed English-Filipino text
+- Auto-detects dominant language
+- Applies appropriate rules for each language
+
+📖 **[Read more about Filipino support →](FILIPINO-SUPPORT.md)**
 
 ## Installation
 
@@ -196,13 +220,16 @@ The extension comes with a beautiful promotional website located in the `website
 
 ## Roadmap
 
+- [x] ✅ Multiple language support (English + Filipino)
+- [x] ✅ Auto language detection
+- [x] ✅ Custom dictionary support
+- [x] ✅ Dark mode theme
+- [x] ✅ Writing goals and tracking
 - [ ] AI-powered suggestions using language models
-- [ ] Custom dictionary support
-- [ ] Multiple language support
+- [ ] More Filipino regional languages (Bisaya, Ilokano)
+- [ ] Spanish language support
 - [ ] Tone detection (formal, casual, friendly)
-- [ ] Writing goals and tracking
 - [ ] Browser sync across devices
-- [ ] Dark mode theme
 - [ ] Advanced grammar rules
 - [ ] Performance optimizations
 - [ ] Chrome Web Store publication

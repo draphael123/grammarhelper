@@ -557,6 +557,30 @@
   gap: 12px;
   margin-bottom: 20px;
   flex-wrap: wrap;
+  align-items: center;
+}
+
+.language-selector {
+  padding: 10px 16px;
+  background: white;
+  border: 2px solid var(--primary);
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.language-selector:hover {
+  border-color: var(--secondary);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
+}
+
+.language-selector:focus {
+  outline: none;
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
 .demo-btn {

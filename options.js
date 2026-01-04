@@ -42,6 +42,7 @@ function loadSettings() {
     document.getElementById('checkDelayValue').textContent = settings.checkDelay || 500;
     
     // Checking
+    document.getElementById('language').value = settings.language || 'en';
     document.getElementById('checkSpelling').checked = settings.checkSpelling !== false;
     document.getElementById('checkGrammar').checked = settings.checkGrammar !== false;
     document.getElementById('checkStyle').checked = settings.checkStyle !== false;
@@ -112,6 +113,12 @@ function setupEventListeners() {
   document.getElementById('checkDelay').addEventListener('input', (e) => {
     document.getElementById('checkDelayValue').textContent = e.target.value;
     saveSetting('checkDelay', parseInt(e.target.value));
+  });
+  
+  // Language setting
+  document.getElementById('language').addEventListener('change', (e) => {
+    saveSetting('language', e.target.value);
+    showToast(`Language changed to: ${e.target.options[e.target.selectedIndex].text}`);
   });
   
   // Checking settings

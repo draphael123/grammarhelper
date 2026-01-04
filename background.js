@@ -10,6 +10,7 @@ chrome.runtime.onInstalled.addListener((details) => {
       showBadge: true,
       soundEffects: false,
       checkDelay: 500,
+      language: 'en', // Default to English
       checkSpelling: true,
       checkGrammar: true,
       checkStyle: true,

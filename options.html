@@ -90,6 +90,17 @@
         <h2>What to Check</h2>
         
         <div class="setting-group">
+          <label>Language / Wika:</label>
+          <select id="language">
+            <option value="auto">🌐 Auto-Detect</option>
+            <option value="en" selected>🇺🇸 English</option>
+            <option value="fil">🇵🇭 Filipino (Tagalog)</option>
+            <option value="both">🌍 Both (English + Filipino)</option>
+          </select>
+          <p class="setting-description">Choose which language(s) to check. Auto-detect will identify the language automatically.</p>
+        </div>
+        
+        <div class="setting-group">
           <label class="setting-label">
             <input type="checkbox" id="checkSpelling" checked>
             <span>Spelling errors</span>

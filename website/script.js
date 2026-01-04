@@ -426,9 +426,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const wordsCountEl = document.getElementById('wordsCount');
   let errorsVisible = true;
 
-  const sampleText = "Their are many benefits to using GrammarGuard for you're writing needs. Its a great tool that helps catch alot of common mistakes. We recieved positive feedback from users who says it makes their writing better.  Weather your a student or professional,GrammarGuard can help you write more good.";
+  const sampleTexts = {
+    english: "Their are many benefits to using GrammarGuard for you're writing needs. Its a great tool that helps catch alot of common mistakes. We recieved positive feedback from users who says it makes their writing better.  Weather your a student or professional,GrammarGuard can help you write more good.",
+    filipino: "Ang mga mga estudyante ay nag ka roon ng magandang resulta. Gusto ko nang magpunta sa palengke kase kailangan ko rin ng mga pamili. Pag dating namin doon, bibili kami ng mga prutas at gulay. May roon akong kaibigan na mayroon din ng sariling tindahan. Hindi mayroon sila ng sapat na oras para mag linis ng kanilang bahay. Ang pag asa ko ay maging mas mabuti ang lahat."
+  };
+  
+  let currentLanguage = 'english';
 
-  const grammarRules = [
+  const englishRules = [
     // Common misspellings
     { pattern: /\bteh\b/gi, type: 'spelling', message: 'Use "the"' },
     { pattern: /\bthi\b/gi, type: 'spelling', message: 'Use "this"' },
@@ -461,10 +466,35 @@ document.addEventListener('DOMContentLoaded', () => {
     { pattern: /\bmore\s+good\b/gi, type: 'grammar', message: 'Use "better"' },
     { pattern: /(^|[.!?]\s+)([a-z])/g, type: 'capitalization', message: 'Capitalize first letter' }
   ];
+  
+  const filipinoRules = [
+    // Common Filipino/Tagalog errors
+    { pattern: /\bmga\s+mga\b/gi, type: 'grammar', message: 'Dapat "mga" lang (huwag ulit-ulit)' },
+    { pattern: /\bng\s+ng\b/gi, type: 'grammar', message: 'Dapat "ng" lang (huwag ulit-ulit)' },
+    { pattern: /\bkase\b/gi, type: 'spelling', message: 'Dapat "kasi"' },
+    { pattern: /\bnag\s+ka\s+(\w+)/gi, type: 'spelling', message: 'Dapat "nagka" + salita (walang puwang)' },
+    { pattern: /\bpinaka\s+(\w+)/gi, type: 'spelling', message: 'Dapat "pinaka" + salita (walang puwang)' },
+    { pattern: /\bpag\s+(\w+ing)\b/gi, type: 'spelling', message: 'Dapat "pag" + salita (walang puwang)' },
+    { pattern: /\bgusto\s+ko\s+nang\b/gi, type: 'grammar', message: 'Dapat "gusto ko ng" (possession)' },
+    { pattern: /\bmayroon\s+ako\b/gi, type: 'grammar', message: 'Dapat "may ako" (use "may" with pronouns)' },
+    { pattern: /\bhindi\s+mayroon\b/gi, type: 'style', message: 'Mas maganda: "wala"' },
+    { pattern: /\bpag\s+asa\b/gi, type: 'spelling', message: 'Dapat "pag-asa" (may gitling)' },
+    { pattern: /\bd\s+rin\b/gi, type: 'grammar', message: 'Dapat "din" pagkatapos ng "d"' },
+    { pattern: /\bt\s+rin\b/gi, type: 'grammar', message: 'Dapat "din" pagkatapos ng "t"' },
+    { pattern: /\bs\s+rin\b/gi, type: 'grammar', message: 'Dapat "din" pagkatapos ng "s"' },
+    { pattern: /\bmag\s+(\w{4,})/gi, type: 'spelling', message: 'Dapat "mag" + salita (walang puwang)' },
+    { pattern: /\bpag\s+dating\b/gi, type: 'spelling', message: 'Dapat "pagdating" (walang puwang)' },
+    { pattern: /\bpaki\s+usap\b/gi, type: 'spelling', message: 'Dapat "pakiusap" (walang puwang)' },
+    { pattern: /\bmay\s+roon\b/gi, type: 'spelling', message: 'Dapat "mayroon" (isang salita)' },
+    { pattern: /\s{2,}/g, type: 'spacing', message: 'Sobrang puwang' },
+    { pattern: /(^|[.!?]\s+)([a-z])/g, type: 'capitalization', message: 'Dapat malaking letra sa simula' }
+  ];
 
   function checkGrammar(text) {
     const errors = [];
-    grammarRules.forEach(rule => {
+    const rules = currentLanguage === 'filipino' ? filipinoRules : englishRules;
+    
+    rules.forEach(rule => {
       let match;
       while ((match = rule.pattern.exec(text)) !== null) {
         errors.push({
@@ -523,8 +553,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (loadSampleBtn) {
     loadSampleBtn.addEventListener('click', () => {
-      liveEditor.textContent = sampleText;
+      liveEditor.textContent = sampleTexts[currentLanguage];
       highlightErrors();
+    });
+  }
+  
+  // Language selector
+  const languageSelector = document.getElementById('languageSelector');
+  if (languageSelector) {
+    languageSelector.addEventListener('change', (e) => {
+      currentLanguage = e.target.value;
+      if (liveEditor.textContent.trim()) {
+        highlightErrors();
+      }
     });
   }
 
