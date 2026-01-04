@@ -1,12 +1,16 @@
 {
   "manifest_version": 3,
   "name": "GrammarGuard - Writing Assistant",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "AI-powered writing assistant that checks grammar, spelling, and style in real-time across all websites including Slack, Gmail, and more",
   "permissions": [
     "activeTab",
     "storage",
-    "contextMenus"
+    "contextMenus",
+    "scripting"
+  ],
+  "optional_permissions": [
+    "notifications"
   ],
   "host_permissions": [
     "<all_urls>"
@@ -34,6 +38,23 @@
   ],
   "background": {
     "service_worker": "background.js"
+  },
+  "options_page": "options.html",
+  "commands": {
+    "toggle-extension": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+G",
+        "mac": "Command+Shift+G"
+      },
+      "description": "Toggle GrammarGuard on/off"
+    },
+    "show-errors": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+E",
+        "mac": "Command+Shift+E"
+      },
+      "description": "Show all errors"
+    }
   },
   "web_accessible_resources": [
     {
