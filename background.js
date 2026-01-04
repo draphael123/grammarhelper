@@ -1,5 +1,20 @@
 // Background Service Worker for GrammarGuard v2.0
 
+// Import gamification system
+importScripts('gamification.js');
+
+let gamificationSystem;
+
+// Initialize gamification
+async function initGamification() {
+  gamificationSystem = new GamificationSystem();
+  await gamificationSystem.init();
+  console.log('🎮 Gamification system initialized in background');
+}
+
+// Initialize on startup
+initGamification();
+
 // Installation handler
 chrome.runtime.onInstalled.addListener((details) => {
   if (details.reason === 'install') {
@@ -150,7 +165,26 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       sendResponse(result);
     });
     return true; // Will respond asynchronously
+  } else if (request.action === 'trackWriting') {
+    // Track writing session in gamification system
+    if (gamificationSystem) {
+      gamificationSystem.recordWritingSession(request.data);
+      sendResponse({ success: true });
+    }
+  } else if (request.action === 'showNotification') {
+    // Show notification
+    showNotification(request.message, request.type, request.duration);
+    sendResponse({ success: true });
+  } else if (request.action === 'showConfetti') {
+    // Trigger confetti animation in popup
+    chrome.runtime.sendMessage({ action: 'triggerConfetti' });
+    sendResponse({ success: true });
+  } else if (request.action === 'playSound') {
+    // Play achievement sound
+    playSound(request.sound);
+    sendResponse({ success: true });
   }
+  return true;
 });
 
 // Update statistics
@@ -315,4 +349,32 @@ chrome.alarms.onAlarm.addListener((alarm) => {
     updateStreak();
   }
 });
+
+// === GAMIFICATION HELPERS ===
+function showNotification(message, type = 'info', duration = 3000) {
+  // Create browser notification
+  chrome.notifications.create({
+    type: 'basic',
+    iconUrl: 'icons/icon128.png',
+    title: 'GrammarGuard',
+    message: message,
+    priority: type === 'achievement' ? 2 : 1
+  }, (notificationId) => {
+    // Auto-clear after duration
+    setTimeout(() => {
+      chrome.notifications.clear(notificationId);
+    }, duration);
+  });
+}
+
+function playSound(soundName) {
+  // Play sound effects (if enabled)
+  chrome.storage.sync.get(['soundEnabled'], (result) => {
+    if (result.soundEnabled !== false) {
+      // Note: Web Audio API in service worker
+      console.log('🔊 Would play sound:', soundName);
+      // Actual sound playback would require audio files
+    }
+  });
+}
 

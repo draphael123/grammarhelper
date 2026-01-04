@@ -144,12 +144,31 @@ class GrammarGuard {
     const errors = this.findErrors(text);
     console.log(`📊 Found ${errors.length} errors:`, errors);
 
+    // Track writing session
+    const wordCount = text.trim().split(/\s+/).filter(w => w.length > 0).length;
+    if (wordCount > 0) {
+      this.trackWritingSession(wordCount, errors.length);
+    }
+
     if (errors.length > 0) {
       console.log('🎨 Attempting to display errors...');
       this.displayErrors(element, errors);
     } else {
       console.log('✅ No errors found in this text');
     }
+  }
+  
+  trackWritingSession(words, errors) {
+    // Send stats to gamification system
+    chrome.runtime.sendMessage({
+      action: 'trackWriting',
+      data: {
+        words: words,
+        errors: errors,
+        timeSpent: 1, // minutes (estimate)
+        accuracy: errors > 0 ? Math.round(((words - errors) / words) * 100) : 100
+      }
+    });
   }
 
   findErrors(text) {

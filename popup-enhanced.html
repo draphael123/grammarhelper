@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"="width=device-width, initial-scale=1.0">
+  <title>GrammarGuard</title>
+  <link rel="stylesheet" href="popup-enhanced.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <div class="header">
+      <div class="mascot-container">
+        <span class="mascot" id="mascot">🦉</span>
+      </div>
+      <div class="header-text">
+        <h1>GrammarGuard</h1>
+        <p class="encouraging-message" id="encouragingMessage">Ready to write!</p>
+      </div>
+      <button class="settings-btn" id="settingsBtn" title="Settings">⚙️</button>
+    </div>
+
+    <!-- Streak & Level -->
+    <div class="streak-level-container">
+      <div class="streak-card">
+        <div class="streak-icon">🔥</div>
+        <div class="streak-info">
+          <div class="streak-number" id="streakNumber">0</div>
+          <div class="streak-label">Day Streak</div>
+        </div>
+      </div>
+      
+      <div class="level-card">
+        <div class="level-icon">⚡</div>
+        <div class="level-info">
+          <div class="level-number">Level <span id="levelNumber">1</span></div>
+          <div class="level-title" id="levelTitle">Beginner Writer</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- XP Progress -->
+    <div class="xp-container">
+      <div class="xp-label">
+        <span id="xpCurrent">0</span> / <span id="xpNeeded">100</span> XP
+      </div>
+      <div class="xp-bar">
+        <div class="xp-bar-fill" id="xpBarFill" style="width: 0%"></div>
+      </div>
+      <div class="xp-percentage" id="xpPercentage">0%</div>
+    </div>
+
+    <!-- Daily Goal -->
+    <div class="daily-goal-container">
+      <div class="goal-header">
+        <span>📝 Today's Goal</span>
+        <button class="goal-edit-btn" id="goalEditBtn" title="Edit goal">✏️</button>
+      </div>
+      <div class="goal-progress">
+        <div class="goal-bar">
+          <div class="goal-bar-fill" id="goalBarFill" style="width: 0%"></div>
+        </div>
+        <div class="goal-text">
+          <span id="wordsToday">0</span> / <span id="goalWords">500</span> words
+          (<span id="goalPercentage">0</span>%)
+        </div>
+      </div>
+    </div>
+
+    <!-- Today's Stats -->
+    <div class="stats-container">
+      <h3>📊 Today's Stats</h3>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">📝</div>
+          <div class="stat-value" id="statWords">0</div>
+          <div class="stat-label">Words</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">✅</div>
+          <div class="stat-value" id="statAccuracy">100%</div>
+          <div class="stat-label">Accuracy</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🔧</div>
+          <div class="stat-value" id="statErrors">0</div>
+          <div class="stat-label">Errors</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⏱️</div>
+          <div class="stat-value" id="statTime">0m</div>
+          <div class="stat-label">Time</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Daily Tip -->
+    <div class="tip-container">
+      <div class="tip-header">
+        <span>💡 Tip of the Day</span>
+        <button class="tip-next-btn" id="tipNextBtn" title="Next tip">→</button>
+      </div>
+      <div class="tip-content">
+        <div class="tip-title" id="tipTitle">Use Active Voice</div>
+        <div class="tip-example">
+          <div class="tip-wrong">❌ <span id="tipWrong">The ball was thrown</span></div>
+          <div class="tip-right">✅ <span id="tipRight">John threw the ball</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Achievements -->
+    <div class="achievements-preview">
+      <div class="achievements-header">
+        <span>🏆 Recent Achievements</span>
+        <button class="view-all-btn" id="viewAchievementsBtn">View All</button>
+      </div>
+      <div class="achievements-list" id="recentAchievements">
+        <div class="no-achievements">
+          Start writing to unlock achievements!
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+      <button class="btn btn-primary" id="dashboardBtn">
+        📊 Full Dashboard
+      </button>
+      <button class="btn btn-secondary" id="achievementsBtn">
+        🏆 Achievements
+      </button>
+    </div>
+
+    <!-- Quick Toggle -->
+    <div class="quick-toggle">
+      <label class="toggle-switch">
+        <input type="checkbox" id="extensionToggle" checked>
+        <span class="toggle-slider"></span>
+      </label>
+      <span class="toggle-label">Extension Enabled</span>
+    </div>
+  </div>
+
+  <!-- Celebration Overlay -->
+  <div class="celebration-overlay hidden" id="celebrationOverlay">
+    <div class="celebration-content">
+      <div class="celebration-icon" id="celebrationIcon">🎉</div>
+      <div class="celebration-title" id="celebrationTitle">Achievement Unlocked!</div>
+      <div class="celebration-message" id="celebrationMessage">First Steps</div>
+    </div>
+  </div>
+
+  <script src="gamification.js"></script>
+  <script src="popup-enhanced.js"></script>
+</body>
+</html>
+
