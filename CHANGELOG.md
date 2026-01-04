@@ -8,18 +8,24 @@ All notable changes to GrammarGuard will be documented in this file.
 
 #### Added
 - **Full Filipino/Tagalog Language Support**: Comprehensive grammar and spelling checking for Filipino
-  - 35+ Filipino-specific grammar rules
+  - **70+ Filipino-specific rules** (40+ spelling, 30+ grammar)
+  - **40+ Spelling error patterns** including text speak, common misspellings, and word combinations
   - Automatic language detection (English, Filipino, or mixed)
   - Bilingual mode for Taglish (mixed English-Filipino)
   - Filipino error messages and explanations
   
-- **Filipino Grammar Rules**:
+- **Filipino Spelling Rules** (40+ patterns):
+  - **Text Speak Detection** - kase → kasi, nung → noong, sna → sana, bka → baka, wla → wala, hndi → hindi, lng → lang, d2 → dito, yn → iyan, un → iyon, and 20+ more
+  - **Common Misspellings** - pwede → puwede, meron → mayroon, kailagan → kailangan, kahpon → kahapon
+  - **Word Combinations** - saakin → sa akin, sakanya → sa kanya, nasakin → nasa akin, and 10+ more patterns
+  - **Prefix/Suffix Spacing** - nag ka → nagka, pag asa → pag-asa, may roon → mayroon
+  
+- **Filipino Grammar Rules** (30+ patterns):
   - **Ng vs Nang** - Proper usage detection and correction
   - **Din vs Rin / Daw vs Raw** - Phonetic-based suggestions
   - **Prefix Spacing** - Detects improper spacing in affixes (nag-, pag-, pinaka-, ka-...-an)
   - **Redundancy Detection** - Catches repeated words (mga mga → mga, ng ng → ng)
   - **May vs Mayroon** - Context-aware pronoun usage
-  - **Common Misspellings** - kase → kasi, and more
   - **Hyphenation** - Proper use of hyphens (pag-asa)
   - **Capitalization** - First letter of sentences
   - **Spacing** - Extra space removal

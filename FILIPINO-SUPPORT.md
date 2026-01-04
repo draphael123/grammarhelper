@@ -12,21 +12,55 @@ GrammarGuard v2.1 now includes comprehensive support for **Filipino (Tagalog)** 
 
 ### Filipino-Specific Rules
 
-#### 1. **Ng vs Nang**
+#### 1. **Common Spelling Mistakes**
+The extension detects and corrects **40+ common Filipino spelling errors**:
+
+**Text Speak to Proper Filipino:**
+- ❌ `kase` → ✅ `kasi`
+- ❌ `nung` → ✅ `noong`
+- ❌ `sna` → ✅ `sana`
+- ❌ `bka` → ✅ `baka`
+- ❌ `wla` → ✅ `wala`
+- ❌ `hndi` → ✅ `hindi`
+- ❌ `lng` → ✅ `lang`
+- ❌ `d2` → ✅ `dito`
+- ❌ `dun` → ✅ `doon`
+- ❌ `yn` → ✅ `iyan`
+- ❌ `un` → ✅ `iyon`
+- ❌ `buks` → ✅ `bukas`
+- ❌ `pra` → ✅ `para`
+- ❌ `ksama` → ✅ `kasama`
+- ❌ `gsto` → ✅ `gusto`
+
+**Common Word Misspellings:**
+- ❌ `pwede` → ✅ `puwede`
+- ❌ `meron` → ✅ `mayroon`
+- ❌ `kailagan` → ✅ `kailangan`
+- ❌ `kahpon` → ✅ `kahapon`
+
+**Improper Word Combinations:**
+- ❌ `saakin` → ✅ `sa akin`
+- ❌ `saiyo` → ✅ `sa iyo`
+- ❌ `sakanya` → ✅ `sa kanya`
+- ❌ `sakanila` → ✅ `sa kanila`
+- ❌ `nasakin` → ✅ `nasa akin`
+- ❌ `nasakanya` → ✅ `nasa kanya`
+
+#### 2. **Ng vs Nang**
 The extension correctly identifies when to use "ng" vs "nang":
 - ✅ `gusto ko ng` (possession/need) 
 - ❌ `gusto ko nang` 
 - ✅ `nang mabilis` (manner/adverb)
 - ❌ `ng mabilis`
 
-#### 2. **Din vs Rin / Daw vs Raw**
+#### 3. **Din vs Rin / Daw vs Raw**
 Automatic detection of proper usage based on preceding sound:
 - ✅ `ako rin` (after vowel)
 - ❌ `ako din`
 - ✅ `siya din` (after d, t, s)
 - ❌ `siya rin`
 
-#### 3. **Prefix Spacing**
+#### 4. **Prefix Spacing**
 Detects when prefixes should be attached to root words:
 - ✅ `nagkaroon` (nag + ka + roon)
 - ❌ `nag ka roon`
@@ -35,18 +69,12 @@ Detects when prefixes should be attached to root words:
 - ✅ `pagdating` (pag + dating)
 - ❌ `pag dating`
 
-#### 4. **Redundant Words**
+#### 5. **Redundant Words**
 Catches common redundancies:
 - ✅ `mga estudyante`
 - ❌ `mga mga estudyante`
 - ✅ `ng bansa`
 - ❌ `ng ng bansa`
-
-#### 5. **Common Misspellings**
-- ✅ `kasi` 
-- ❌ `kase`
-- ✅ `pag-asa` (with hyphen)
-- ❌ `pag asa`
 
 #### 6. **May vs Mayroon**
 Proper usage with pronouns:
@@ -83,18 +111,20 @@ GrammarGuard supports mixed-language writing (Taglish):
 
 ## Examples
 
-### Before GrammarGuard
+### Before GrammarGuard (with spelling and grammar errors)
 ```
 Ang mga mga estudyante ay nag ka roon ng magandang resulta. Gusto ko nang 
-magpunta sa palengke kase kailangan ko rin ng mga pamili. Pag dating namin 
-doon, bibili kami ng mga prutas.
+magpunta sa palengke kase kailagan ko rin ng mga pamili. Pag dating namin 
+doon, bibili kami ng mga prutas. Meron akong kaibigan. Sna pwede kami 
+pumunta dun buks. Wla pa kami nung lng na bisita saakin at sakanya.
 ```
 
-### After GrammarGuard
+### After GrammarGuard (all errors corrected)
 ```
 Ang mga estudyante ay nagkaroon ng magandang resulta. Gusto ko ng 
 magpunta sa palengke kasi kailangan ko din ng mga pamili. Pagdating namin 
-doon, bibili kami ng mga prutas.
+doon, bibili kami ng mga prutas. Mayroon akong kaibigan. Sana puwede kami 
+pumunta doon bukas. Wala pa kami noong lang na bisita sa akin at sa kanya.
 ```
 
 ## Error Messages
@@ -135,9 +165,9 @@ Try the interactive demo on our website:
 4. Click "Load Sample Text" to see Filipino error detection in action
 5. Or type your own Filipino text!
 
-## Grammar Rules Covered
+## Grammar & Spelling Rules Covered
 
-GrammarGuard checks for **35+ Filipino grammar rules** including:
+GrammarGuard checks for **70+ Filipino grammar and spelling rules** including:
 
 ### Morphology
 - Affixes (unlapi, gitlapi, hulapi, kabilaan)

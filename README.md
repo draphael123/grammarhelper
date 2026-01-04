@@ -43,18 +43,26 @@ GrammarGuard is a powerful Chrome extension that works just like Grammarly, prov
 - Readability enhancements
 
 ### 🇵🇭 Filipino/Tagalog Language **NEW!**
-**Grammar Rules (35+ patterns):**
-- **Ng vs Nang** - Proper usage detection
+**70+ Grammar & Spelling Rules:**
+
+**Spelling Corrections (40+ patterns):**
+- **Text Speak** - `kase` → `kasi`, `nung` → `noong`, `sna` → `sana`
+- **Common Misspellings** - `pwede` → `puwede`, `meron` → `mayroon`
+- **Word Combinations** - `saakin` → `sa akin`, `sakanya` → `sa kanya`
+- **Typos** - `kailagan` → `kailangan`, `kahpon` → `kahapon`
+
+**Grammar Rules (30+ patterns):**
+- **Ng vs Nang** - Proper usage detection (possession vs manner)
 - **Din vs Rin / Daw vs Raw** - Automatic phonetic matching
 - **Prefix Spacing** - Correct attachment (nag-, pag-, pinaka-, ka-...-an)
 - **Redundancy** - Catches repeated words (mga mga → mga)
 - **May vs Mayroon** - Context-aware suggestions
 
-**Common Corrections:**
-- Prefix attachment: `pag dating` → `pagdating`
-- Spelling: `kase` → `kasi`
+**Example Corrections:**
+- Spelling: `kase` → `kasi`, `wla` → `wala`, `hndi` → `hindi`
+- Prefix: `pag dating` → `pagdating`, `nag ka` → `nagka`
 - Grammar: `gusto ko nang` → `gusto ko ng`
-- Hyphenation: `pag asa` → `pag-asa`
+- Combinations: `saakin` → `sa akin`, `nasakanya` → `nasa kanya`
 
 **Bilingual (Taglish) Support:**
 - Checks mixed English-Filipino text

@@ -428,7 +428,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const sampleTexts = {
     english: "Their are many benefits to using GrammarGuard for you're writing needs. Its a great tool that helps catch alot of common mistakes. We recieved positive feedback from users who says it makes their writing better.  Weather your a student or professional,GrammarGuard can help you write more good.",
-    filipino: "Ang mga mga estudyante ay nag ka roon ng magandang resulta. Gusto ko nang magpunta sa palengke kase kailangan ko rin ng mga pamili. Pag dating namin doon, bibili kami ng mga prutas at gulay. May roon akong kaibigan na mayroon din ng sariling tindahan. Hindi mayroon sila ng sapat na oras para mag linis ng kanilang bahay. Ang pag asa ko ay maging mas mabuti ang lahat."
+    filipino: "Ang mga mga estudyante ay nag ka roon ng magandang resulta. Gusto ko nang magpunta sa palengke kase kailagan ko rin ng mga pamili. Pag dating namin doon, bibili kami ng mga prutas. Meron akong kaibigan na mayroon din ng sariling tindahan. Hindi mayroon sila ng sapat na oras para mag linis. Ang pag asa ko ay maging mas mabuti. Sna pwede kami pumunta dun buks. Wla pa kami nung lng na bisita saakin at sakanya."
   };
   
   let currentLanguage = 'english';
@@ -471,10 +471,44 @@ document.addEventListener('DOMContentLoaded', () => {
     // Common Filipino/Tagalog errors
     { pattern: /\bmga\s+mga\b/gi, type: 'grammar', message: 'Dapat "mga" lang (huwag ulit-ulit)' },
     { pattern: /\bng\s+ng\b/gi, type: 'grammar', message: 'Dapat "ng" lang (huwag ulit-ulit)' },
+    
+    // Spelling mistakes - text speak
     { pattern: /\bkase\b/gi, type: 'spelling', message: 'Dapat "kasi"' },
+    { pattern: /\bnung\b/gi, type: 'spelling', message: 'Dapat "noong"' },
+    { pattern: /\bsna\b/gi, type: 'spelling', message: 'Dapat "sana"' },
+    { pattern: /\bbka\b/gi, type: 'spelling', message: 'Dapat "baka"' },
+    { pattern: /\bwla\b/gi, type: 'spelling', message: 'Dapat "wala"' },
+    { pattern: /\bhndi\b/gi, type: 'spelling', message: 'Dapat "hindi"' },
+    { pattern: /\blng\b/gi, type: 'spelling', message: 'Dapat "lang"' },
+    { pattern: /\bd2\b/gi, type: 'spelling', message: 'Dapat "dito"' },
+    { pattern: /\bdun\b/gi, type: 'spelling', message: 'Dapat "doon"' },
+    { pattern: /\byn\b/gi, type: 'spelling', message: 'Dapat "iyan"' },
+    { pattern: /\bun\b/gi, type: 'spelling', message: 'Dapat "iyon"' },
+    { pattern: /\bpwede\b/gi, type: 'spelling', message: 'Dapat "puwede"' },
+    { pattern: /\bmeron\b/gi, type: 'spelling', message: 'Dapat "mayroon"' },
+    { pattern: /\bbuks\b/gi, type: 'spelling', message: 'Dapat "bukas"' },
+    { pattern: /\bpra\b/gi, type: 'spelling', message: 'Dapat "para"' },
+    { pattern: /\bksama\b/gi, type: 'spelling', message: 'Dapat "kasama"' },
+    { pattern: /\bgsto\b/gi, type: 'spelling', message: 'Dapat "gusto"' },
+    { pattern: /\bkht\b/gi, type: 'spelling', message: 'Dapat "kahit"' },
+    { pattern: /\bkailagan\b/gi, type: 'spelling', message: 'Dapat "kailangan"' },
+    
+    // Improper word combinations
+    { pattern: /\bsaakin\b/gi, type: 'spelling', message: 'Dapat "sa akin" (dalawang salita)' },
+    { pattern: /\bsaiyo\b/gi, type: 'spelling', message: 'Dapat "sa iyo" (dalawang salita)' },
+    { pattern: /\bsakanya\b/gi, type: 'spelling', message: 'Dapat "sa kanya" (dalawang salita)' },
+    { pattern: /\bnasakin\b/gi, type: 'spelling', message: 'Dapat "nasa akin" (dalawang salita)' },
+    
+    // Prefix spacing
     { pattern: /\bnag\s+ka\s+(\w+)/gi, type: 'spelling', message: 'Dapat "nagka" + salita (walang puwang)' },
     { pattern: /\bpinaka\s+(\w+)/gi, type: 'spelling', message: 'Dapat "pinaka" + salita (walang puwang)' },
     { pattern: /\bpag\s+(\w+ing)\b/gi, type: 'spelling', message: 'Dapat "pag" + salita (walang puwang)' },
+    { pattern: /\bmag\s+(\w{4,})/gi, type: 'spelling', message: 'Dapat "mag" + salita (walang puwang)' },
+    { pattern: /\bpag\s+dating\b/gi, type: 'spelling', message: 'Dapat "pagdating" (walang puwang)' },
+    { pattern: /\bpaki\s+usap\b/gi, type: 'spelling', message: 'Dapat "pakiusap" (walang puwang)' },
+    { pattern: /\bmay\s+roon\b/gi, type: 'spelling', message: 'Dapat "mayroon" (isang salita)' },
+    
+    // Grammar rules
     { pattern: /\bgusto\s+ko\s+nang\b/gi, type: 'grammar', message: 'Dapat "gusto ko ng" (possession)' },
     { pattern: /\bmayroon\s+ako\b/gi, type: 'grammar', message: 'Dapat "may ako" (use "may" with pronouns)' },
     { pattern: /\bhindi\s+mayroon\b/gi, type: 'style', message: 'Mas maganda: "wala"' },
@@ -482,10 +516,8 @@ document.addEventListener('DOMContentLoaded', () => {
     { pattern: /\bd\s+rin\b/gi, type: 'grammar', message: 'Dapat "din" pagkatapos ng "d"' },
     { pattern: /\bt\s+rin\b/gi, type: 'grammar', message: 'Dapat "din" pagkatapos ng "t"' },
     { pattern: /\bs\s+rin\b/gi, type: 'grammar', message: 'Dapat "din" pagkatapos ng "s"' },
-    { pattern: /\bmag\s+(\w{4,})/gi, type: 'spelling', message: 'Dapat "mag" + salita (walang puwang)' },
-    { pattern: /\bpag\s+dating\b/gi, type: 'spelling', message: 'Dapat "pagdating" (walang puwang)' },
-    { pattern: /\bpaki\s+usap\b/gi, type: 'spelling', message: 'Dapat "pakiusap" (walang puwang)' },
-    { pattern: /\bmay\s+roon\b/gi, type: 'spelling', message: 'Dapat "mayroon" (isang salita)' },
+    
+    // Formatting
     { pattern: /\s{2,}/g, type: 'spacing', message: 'Sobrang puwang' },
     { pattern: /(^|[.!?]\s+)([a-z])/g, type: 'capitalization', message: 'Dapat malaking letra sa simula' }
   ];
