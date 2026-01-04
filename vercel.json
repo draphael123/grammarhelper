@@ -1,20 +1,12 @@
 {
-  "version": 2,
-  "name": "grammarguard",
-  "builds": [
+  "rewrites": [
     {
-      "src": "website/**",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/website/$1"
+      "source": "/(.*)",
+      "destination": "/website/$1"
     },
     {
-      "src": "/",
-      "dest": "/website/index.html"
+      "source": "/",
+      "destination": "/website/index.html"
     }
   ],
   "headers": [
