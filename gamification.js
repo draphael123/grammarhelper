@@ -121,6 +121,9 @@ class GamificationSystem {
     if (streak === 100) message = "👑 Century Champion! 100 days!";
     
     this.showNotification(message, 'success');
+    
+    // Check streak achievements
+    this.checkAchievements('streak', streak);
   }
   
   showStreakBrokenNotification(oldStreak) {
@@ -422,6 +425,7 @@ class GamificationSystem {
   
   // === DAILY TIP ===
   getDailyTip() {
+    // English-only tips
     const tips = [
       {
         title: "Use Active Voice",
@@ -442,16 +446,46 @@ class GamificationSystem {
         explanation: "It's = it is. Its = possession."
       },
       {
-        title: "Filipino: Ng vs Nang",
-        wrong: "Gusto ko nang libro",
-        right: "Gusto ko ng libro",
-        explanation: "Use 'ng' for possession/need, 'nang' for manner/time."
-      },
-      {
         title: "Eliminate Filler Words",
         wrong: "I think that maybe we should...",
         right: "We should...",
         explanation: "Cut unnecessary words for stronger writing."
+      },
+      {
+        title: "Their, There, They're",
+        wrong: "Their going to the store.",
+        right: "They're going to the store.",
+        explanation: "They're = they are, Their = possession, There = location."
+      },
+      {
+        title: "Affect vs Effect",
+        wrong: "The weather will effect our plans.",
+        right: "The weather will affect our plans.",
+        explanation: "Affect is usually a verb (to influence), Effect is usually a noun (result)."
+      },
+      {
+        title: "Your vs You're",
+        wrong: "Your going to love this!",
+        right: "You're going to love this!",
+        explanation: "You're = you are, Your = possession."
+      },
+      {
+        title: "Fewer vs Less",
+        wrong: "There are less people today.",
+        right: "There are fewer people today.",
+        explanation: "Use 'fewer' for countable items, 'less' for uncountable quantities."
+      },
+      {
+        title: "Who vs Whom",
+        wrong: "Whom is calling?",
+        right: "Who is calling?",
+        explanation: "Who = subject (who did it), Whom = object (to whom/for whom)."
+      },
+      {
+        title: "Then vs Than",
+        wrong: "I like coffee more then tea.",
+        right: "I like coffee more than tea.",
+        explanation: "Than = comparison, Then = time sequence."
       }
     ];
     

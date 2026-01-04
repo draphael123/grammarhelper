@@ -97,11 +97,6 @@ function setupEventListeners() {
     chrome.runtime.openOptionsPage();
   });
   
-  // Dashboard button
-  document.getElementById('dashboardBtn').addEventListener('click', () => {
-    chrome.tabs.create({ url: 'dashboard.html' });
-  });
-  
   // Achievements button
   document.getElementById('achievementsBtn').addEventListener('click', () => {
     chrome.tabs.create({ url: 'achievements.html' });

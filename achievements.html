@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GrammarGuard - Achievements</title>
+  <link rel="stylesheet" href="achievements.css">
+</head>
+<body>
+  <div class="achievements-container">
+    <!-- Header -->
+    <header class="achievements-header">
+      <div class="header-content">
+        <h1>🏆 Achievements</h1>
+        <p class="subtitle">Track your writing journey and unlock badges!</p>
+      </div>
+      <div class="header-stats">
+        <div class="header-stat">
+          <span class="stat-value" id="unlockedCount">0</span>
+          <span class="stat-label">Unlocked</span>
+        </div>
+        <div class="header-stat">
+          <span class="stat-value" id="totalCount">0</span>
+          <span class="stat-label">Total</span>
+        </div>
+        <div class="header-stat">
+          <span class="stat-value" id="completionPercent">0%</span>
+          <span class="stat-label">Complete</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Progress Bar -->
+    <div class="overall-progress">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs">
+      <button class="tab-btn active" data-filter="all">All Achievements</button>
+      <button class="tab-btn" data-filter="unlocked">Unlocked</button>
+      <button class="tab-btn" data-filter="locked">Locked</button>
+      <button class="tab-btn" data-filter="words">Words</button>
+      <button class="tab-btn" data-filter="streak">Streaks</button>
+      <button class="tab-btn" data-filter="corrections">Corrections</button>
+      <button class="tab-btn" data-filter="accuracy">Accuracy</button>
+    </div>
+
+    <!-- Achievements Grid -->
+    <div class="achievements-grid" id="achievementsGrid">
+      <!-- Achievements will be populated here -->
+    </div>
+
+    <!-- Back Button -->
+    <div class="back-button-container">
+      <button class="back-btn" id="backBtn">← Back to Popup</button>
+    </div>
+  </div>
+
+  <script src="gamification.js"></script>
+  <script src="achievements.js"></script>
+</body>
+</html>
+
