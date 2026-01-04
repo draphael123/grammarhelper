@@ -2,6 +2,9 @@
 
 ![GrammarGuard Logo](icons/icon128.svg)
 
+🌐 **Live Website**: https://grammarguard.vercel.app  
+📦 **GitHub Repository**: https://github.com/draphael123/grammarhelper.git
+
 ## Overview
 
 GrammarGuard is a powerful Chrome extension that works just like Grammarly, providing real-time grammar, spelling, and style checking across all websites. Write with confidence everywhere you go online!
