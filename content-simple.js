@@ -70,32 +70,85 @@ class GrammarGuard {
     element.dataset.grammarguardAttached = 'true';
 
     console.log('✅ Attached to element:', element);
+    
+    // Add a visible test button
+    this.addTestButton(element);
 
     let timeout;
     element.addEventListener('input', () => {
       clearTimeout(timeout);
       timeout = setTimeout(() => {
+        console.log('⌨️ Input event triggered, checking text...');
         this.checkText(element);
       }, 500);
+    });
+    
+    // Also check on blur
+    element.addEventListener('blur', () => {
+      console.log('👁️ Blur event triggered, checking text...');
+      this.checkText(element);
     });
 
     // Check initial text if any
     if (element.value || element.textContent) {
-      this.checkText(element);
+      console.log('📝 Element has initial text, checking immediately...');
+      setTimeout(() => this.checkText(element), 1000);
     }
+  }
+  
+  addTestButton(element) {
+    // Add a floating "Check Grammar" button
+    const btn = document.createElement('button');
+    btn.textContent = '🔍 Check';
+    btn.className = 'grammarguard-test-btn';
+    btn.style.cssText = `
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #27ae60;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 999999;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    `;
+    
+    btn.onclick = () => {
+      console.log('🖱️ Manual check button clicked!');
+      this.checkText(element);
+    };
+    
+    // Remove existing button
+    const existing = document.querySelector('.grammarguard-test-btn');
+    if (existing) existing.remove();
+    
+    document.body.appendChild(btn);
+    console.log('✅ Added manual check button to page');
   }
 
   checkText(element) {
     const text = element.value || element.textContent || '';
-    if (!text.trim()) return;
+    
+    console.log('🔍 Checking text:', text.substring(0, 100));
+    console.log('   Text length:', text.length, 'characters');
 
-    console.log('🔍 Checking text:', text.substring(0, 50) + '...');
+    if (!text.trim()) {
+      console.log('⚠️ Text is empty, skipping check');
+      return;
+    }
 
     const errors = this.findErrors(text);
     console.log(`📊 Found ${errors.length} errors:`, errors);
 
     if (errors.length > 0) {
+      console.log('🎨 Attempting to display errors...');
       this.displayErrors(element, errors);
+    } else {
+      console.log('✅ No errors found in this text');
     }
   }
 
@@ -167,26 +220,78 @@ class GrammarGuard {
   }
 
   displayErrors(element, errors) {
+    console.log('🎨 Displaying', errors.length, 'errors for element:', element);
+    
+    // Show alert for debugging
+    if (errors.length > 0) {
+      console.log('⚠️ ERRORS FOUND! Adding visual indicators...');
+      
+      // Add a very visible border to the element
+      element.style.border = '3px solid red';
+      element.style.boxShadow = '0 0 10px rgba(239, 68, 68, 0.5)';
+      
+      // Create a floating error message
+      this.showFloatingMessage(element, `Found ${errors.length} error${errors.length !== 1 ? 's' : ''}!`);
+    }
+    
     // For contenteditable elements, add inline highlighting
     if (element.isContentEditable) {
-      const text = element.textContent;
-      errors.sort((a, b) => b.start - a.start);
-      
-      let html = text;
-      errors.forEach(error => {
-        const before = html.substring(0, error.start);
-        const errorText = html.substring(error.start, error.end);
-        const after = html.substring(error.end);
-        html = before + 
-          `<span style="background-color: rgba(239, 68, 68, 0.3); border-bottom: 2px solid #ef4444; padding: 2px; border-radius: 2px; cursor: pointer;" title="${error.message}">${errorText}</span>` + 
-          after;
-      });
-      
-      element.innerHTML = html;
+      try {
+        const text = element.textContent;
+        errors.sort((a, b) => b.start - a.start);
+        
+        let html = text;
+        errors.forEach(error => {
+          const before = html.substring(0, error.start);
+          const errorText = html.substring(error.start, error.end);
+          const after = html.substring(error.end);
+          html = before + 
+            `<span style="background-color: rgba(239, 68, 68, 0.5) !important; border-bottom: 3px solid #ef4444 !important; padding: 3px !important; border-radius: 3px !important; cursor: pointer !important; font-weight: bold !important;" title="${error.message}">${errorText}</span>` + 
+            after;
+        });
+        
+        element.innerHTML = html;
+        console.log('✅ Applied HTML highlighting to contenteditable');
+      } catch (e) {
+        console.error('❌ Error applying highlighting:', e);
+      }
     } else {
-      // For inputs/textareas, add a badge
+      // For inputs/textareas, add a very visible badge and underline effect
       this.addErrorBadge(element, errors.length);
+      element.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
+      console.log('✅ Applied badge and background to input/textarea');
     }
+  }
+  
+  showFloatingMessage(element, message) {
+    const existing = document.querySelector('.grammarguard-float-msg');
+    if (existing) existing.remove();
+    
+    const msg = document.createElement('div');
+    msg.className = 'grammarguard-float-msg';
+    msg.textContent = message;
+    msg.style.cssText = `
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #ef4444;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      z-index: 999999;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      animation: slideIn 0.3s ease;
+    `;
+    
+    document.body.appendChild(msg);
+    
+    setTimeout(() => {
+      msg.style.opacity = '0';
+      msg.style.transition = 'opacity 0.3s';
+      setTimeout(() => msg.remove(), 300);
+    }, 3000);
   }
 
   addErrorBadge(element, count) {
