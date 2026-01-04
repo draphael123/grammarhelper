@@ -70,9 +70,6 @@ class GrammarGuard {
     element.dataset.grammarguardAttached = 'true';
 
     console.log('✅ Attached to element:', element);
-    
-    // Add a visible test button
-    this.addTestButton(element);
 
     let timeout;
     element.addEventListener('input', () => {
@@ -80,10 +77,10 @@ class GrammarGuard {
       timeout = setTimeout(() => {
         console.log('⌨️ Input event triggered, checking text...');
         this.checkText(element);
-      }, 500);
+      }, 1000); // Increased to 1 second to avoid disrupting typing
     });
     
-    // Also check on blur
+    // Also check on blur (when user leaves the field)
     element.addEventListener('blur', () => {
       console.log('👁️ Blur event triggered, checking text...');
       this.checkText(element);
@@ -94,40 +91,6 @@ class GrammarGuard {
       console.log('📝 Element has initial text, checking immediately...');
       setTimeout(() => this.checkText(element), 1000);
     }
-  }
-  
-  addTestButton(element) {
-    // Add a floating "Check Grammar" button
-    const btn = document.createElement('button');
-    btn.textContent = '🔍 Check';
-    btn.className = 'grammarguard-test-btn';
-    btn.style.cssText = `
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #27ae60;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: bold;
-      cursor: pointer;
-      z-index: 999999;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    `;
-    
-    btn.onclick = () => {
-      console.log('🖱️ Manual check button clicked!');
-      this.checkText(element);
-    };
-    
-    // Remove existing button
-    const existing = document.querySelector('.grammarguard-test-btn');
-    if (existing) existing.remove();
-    
-    document.body.appendChild(btn);
-    console.log('✅ Added manual check button to page');
   }
 
   checkText(element) {
@@ -241,105 +204,199 @@ class GrammarGuard {
   displayErrors(element, errors) {
     console.log('🎨 Displaying', errors.length, 'errors for element:', element);
     
-    // Show alert for debugging
-    if (errors.length > 0) {
-      console.log('⚠️ ERRORS FOUND! Adding visual indicators...');
-      
-      // Add a very visible border to the element
-      element.style.border = '3px solid red';
-      element.style.boxShadow = '0 0 10px rgba(239, 68, 68, 0.5)';
-      
-      // Create a floating error message
-      this.showFloatingMessage(element, `Found ${errors.length} error${errors.length !== 1 ? 's' : ''}!`);
+    // Remove old highlights first
+    this.clearHighlights(element);
+    
+    if (errors.length === 0) {
+      console.log('✅ No errors to display');
+      return;
     }
     
-    // For contenteditable elements, add inline highlighting
+    console.log('⚠️ ERRORS FOUND! Adding visual indicators...');
+    
+    // For contenteditable elements, use non-intrusive highlighting
     if (element.isContentEditable) {
-      try {
-        const text = element.textContent;
-        errors.sort((a, b) => b.start - a.start);
-        
-        let html = text;
-        errors.forEach(error => {
-          const before = html.substring(0, error.start);
-          const errorText = html.substring(error.start, error.end);
-          const after = html.substring(error.end);
-          html = before + 
-            `<span style="background-color: rgba(239, 68, 68, 0.5) !important; border-bottom: 3px solid #ef4444 !important; padding: 3px !important; border-radius: 3px !important; cursor: pointer !important; font-weight: bold !important;" title="${error.message}">${errorText}</span>` + 
-            after;
-        });
-        
-        element.innerHTML = html;
-        console.log('✅ Applied HTML highlighting to contenteditable');
-      } catch (e) {
-        console.error('❌ Error applying highlighting:', e);
-      }
+      this.highlightContentEditableErrors(element, errors);
     } else {
-      // For inputs/textareas, add a very visible badge and underline effect
-      this.addErrorBadge(element, errors.length);
-      element.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
-      console.log('✅ Applied badge and background to input/textarea');
+      // For inputs/textareas, create an overlay with highlights
+      this.createHighlightOverlay(element, errors);
+    }
+    
+    // Create error tooltip list
+    this.createErrorTooltip(element, errors);
+  }
+  
+  clearHighlights(element) {
+    // Remove any existing highlights
+    element.querySelectorAll('.gg-highlight').forEach(el => el.remove());
+    
+    // Remove overlay
+    const overlay = element.parentElement?.querySelector('.gg-highlight-overlay');
+    if (overlay) overlay.remove();
+    
+    // Remove tooltip
+    const tooltip = element.parentElement?.querySelector('.gg-error-tooltip');
+    if (tooltip) tooltip.remove();
+    
+    // Reset styles
+    element.style.border = '';
+    element.style.boxShadow = '';
+    element.style.backgroundColor = '';
+  }
+  
+  highlightContentEditableErrors(element, errors) {
+    try {
+      // Save current cursor position
+      const selection = window.getSelection();
+      const range = selection.rangeCount > 0 ? selection.getRangeAt(0) : null;
+      const cursorOffset = range ? range.startOffset : 0;
+      const cursorNode = range ? range.startContainer : null;
+      
+      console.log('📍 Saved cursor position:', cursorOffset, cursorNode);
+      
+      // Get all text nodes
+      const textNodes = this.getTextNodes(element);
+      let currentOffset = 0;
+      
+      // Apply highlights to text nodes without changing structure
+      textNodes.forEach(node => {
+        const nodeLength = node.textContent.length;
+        const nodeStart = currentOffset;
+        const nodeEnd = currentOffset + nodeLength;
+        
+        // Find errors that overlap with this text node
+        const nodeErrors = errors.filter(error => 
+          error.start < nodeEnd && error.end > nodeStart
+        );
+        
+        if (nodeErrors.length > 0) {
+          // Wrap this text node with highlighting
+          const wrapper = document.createElement('span');
+          wrapper.style.cssText = 'position: relative; display: inline;';
+          
+          nodeErrors.forEach(error => {
+            const highlight = document.createElement('span');
+            highlight.className = 'gg-highlight';
+            highlight.style.cssText = `
+              position: absolute;
+              left: ${Math.max(0, error.start - nodeStart)}ch;
+              width: ${error.end - error.start}ch;
+              bottom: -2px;
+              height: 3px;
+              background: #ef4444;
+              pointer-events: none;
+              z-index: 1;
+            `;
+            wrapper.appendChild(highlight);
+          });
+          
+          node.parentNode.insertBefore(wrapper, node);
+          wrapper.appendChild(node);
+        }
+        
+        currentOffset = nodeEnd;
+      });
+      
+      // Restore cursor position
+      if (cursorNode && range) {
+        try {
+          selection.removeAllRanges();
+          range.setStart(cursorNode, cursorOffset);
+          range.collapse(true);
+          selection.addRange(range);
+          console.log('✅ Restored cursor position');
+        } catch (e) {
+          console.log('⚠️ Could not restore cursor:', e);
+        }
+      }
+      
+      console.log('✅ Applied non-intrusive highlighting to contenteditable');
+    } catch (e) {
+      console.error('❌ Error applying highlighting:', e);
     }
   }
   
-  showFloatingMessage(element, message) {
-    const existing = document.querySelector('.grammarguard-float-msg');
-    if (existing) existing.remove();
+  getTextNodes(element) {
+    const textNodes = [];
+    const walker = document.createTreeWalker(
+      element,
+      NodeFilter.SHOW_TEXT,
+      null,
+      false
+    );
     
-    const msg = document.createElement('div');
-    msg.className = 'grammarguard-float-msg';
-    msg.textContent = message;
-    msg.style.cssText = `
-      position: fixed;
-      top: 20px;
-      right: 20px;
+    let node;
+    while (node = walker.nextNode()) {
+      if (node.textContent.trim()) {
+        textNodes.push(node);
+      }
+    }
+    
+    return textNodes;
+  }
+  
+  createHighlightOverlay(element, errors) {
+    // For textarea/input, create a visual overlay
+    const text = element.value || '';
+    
+    // Add subtle background color
+    element.style.backgroundColor = 'rgba(239, 68, 68, 0.05)';
+    
+    // Add error badge
+    this.addErrorBadge(element, errors.length);
+    
+    console.log('✅ Applied overlay highlighting to input/textarea');
+  }
+  
+  createErrorTooltip(element, errors) {
+    const tooltip = document.createElement('div');
+    tooltip.className = 'gg-error-tooltip';
+    tooltip.style.cssText = `
+      position: absolute;
+      top: -10px;
+      right: 30px;
       background: #ef4444;
       color: white;
-      padding: 15px 25px;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: bold;
-      z-index: 999999;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      animation: slideIn 0.3s ease;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      z-index: 10001;
+      pointer-events: none;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      white-space: nowrap;
+      animation: fadeIn 0.3s ease;
     `;
+    tooltip.textContent = `${errors.length} error${errors.length !== 1 ? 's' : ''} found`;
     
-    document.body.appendChild(msg);
+    // Make parent position relative
+    if (element.parentElement) {
+      const parent = element.parentElement;
+      const position = getComputedStyle(parent).position;
+      if (position === 'static') {
+        parent.style.position = 'relative';
+      }
+      parent.appendChild(tooltip);
+    }
     
+    // Auto-hide after 3 seconds
     setTimeout(() => {
-      msg.style.opacity = '0';
-      msg.style.transition = 'opacity 0.3s';
-      setTimeout(() => msg.remove(), 300);
+      tooltip.style.opacity = '0';
+      tooltip.style.transition = 'opacity 0.3s';
+      setTimeout(() => tooltip.remove(), 300);
     }, 3000);
   }
-
+  
   addErrorBadge(element, count) {
     // Remove existing badge
     const existing = element.parentElement?.querySelector('.grammarguard-badge');
     if (existing) existing.remove();
 
-    // Create badge
+    // Create badge with count
     const badge = document.createElement('div');
     badge.className = 'grammarguard-badge';
     badge.textContent = count;
-    badge.title = `${count} error${count !== 1 ? 's' : ''} found`;
-    badge.style.cssText = `
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      background: #ef4444;
-      color: white;
-      border-radius: 50%;
-      width: 20px;
-      height: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      font-weight: bold;
-      z-index: 10000;
-      pointer-events: none;
-    `;
+    badge.title = `${count} error${count !== 1 ? 's' : ''} found - Click to review`;
 
     // Make parent position relative
     if (element.parentElement) {
@@ -350,6 +407,8 @@ class GrammarGuard {
       }
       parent.appendChild(badge);
     }
+    
+    console.log('✅ Added error badge with count:', count);
   }
 }
 
