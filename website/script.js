@@ -925,9 +925,291 @@ document.addEventListener('DOMContentLoaded', () => {
     return labels[category] || category;
   }
 
+  // === LIVE CHAT FUNCTIONALITY ===
+  const chatWidget = document.getElementById('chatWidget');
+  const chatToggleBtn = document.getElementById('chatToggleBtn');
+  const chatMinimizeBtn = document.getElementById('chatMinimizeBtn');
+  const chatJoinForm = document.getElementById('chatJoinForm');
+  const chatMessages = document.getElementById('chatMessages');
+  const chatInputArea = document.getElementById('chatInputArea');
+  const joinChatBtn = document.getElementById('joinChatBtn');
+  const chatUsernameInput = document.getElementById('chatUsername');
+  const chatMessageInput = document.getElementById('chatMessageInput');
+  const sendMessageBtn = document.getElementById('sendMessageBtn');
+  const emojiBtn = document.getElementById('emojiBtn');
+  const emojiPicker = document.getElementById('emojiPicker');
+  const chatNotificationBadge = document.getElementById('chatNotificationBadge');
+  
+  let currentUser = null;
+  let messageCount = 0;
+  
+  // Toggle chat open/close
+  chatToggleBtn.addEventListener('click', () => {
+    chatWidget.classList.toggle('open');
+    if (chatWidget.classList.contains('open')) {
+      chatNotificationBadge.classList.add('hidden');
+      // Focus username input if not joined
+      if (!currentUser) {
+        setTimeout(() => chatUsernameInput.focus(), 100);
+      }
+    }
+  });
+  
+  // Minimize chat
+  chatMinimizeBtn.addEventListener('click', () => {
+    chatWidget.classList.remove('open');
+  });
+  
+  // Join chat
+  joinChatBtn.addEventListener('click', () => {
+    const username = chatUsernameInput.value.trim();
+    if (username) {
+      currentUser = username;
+      
+      // Hide join form, show chat
+      chatJoinForm.style.display = 'none';
+      chatInputArea.style.display = 'block';
+      
+      // Add join message
+      addSystemMessage(`${username} joined the chat`);
+      
+      // Add welcome message from bot
+      setTimeout(() => {
+        addBotMessage("Hi! Welcome to GrammarGuard chat! Feel free to ask questions or share feedback. 👋");
+      }, 500);
+      
+      // Simulate other users
+      setTimeout(() => {
+        addMessage('Alex', "Hey! Welcome to the community! 😊", false);
+      }, 2000);
+      
+      console.log('User joined chat:', username);
+    }
+  });
+  
+  // Allow Enter key to join
+  chatUsernameInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      joinChatBtn.click();
+    }
+  });
+  
+  // Send message
+  function sendMessage() {
+    const message = chatMessageInput.value.trim();
+    if (message && currentUser) {
+      addMessage(currentUser, message, true);
+      chatMessageInput.value = '';
+      
+      // Simulate bot response sometimes
+      if (Math.random() > 0.5) {
+        setTimeout(() => {
+          showTypingIndicator();
+          setTimeout(() => {
+            hideTypingIndicator();
+            const responses = [
+              "That's a great point! 👍",
+              "Thanks for sharing! We'll look into that.",
+              "Interesting! Have you tried the latest version?",
+              "Great suggestion! You should add it to our suggestion board.",
+              "Thanks for the feedback! Our team will review this. ✨"
+            ];
+            addBotMessage(responses[Math.floor(Math.random() * responses.length)]);
+          }, 1500);
+        }, 1000);
+      }
+    }
+  }
+  
+  sendMessageBtn.addEventListener('click', sendMessage);
+  
+  // Allow Enter key to send
+  chatMessageInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+  
+  // Emoji picker
+  emojiBtn.addEventListener('click', () => {
+    emojiPicker.style.display = emojiPicker.style.display === 'none' ? 'grid' : 'none';
+  });
+  
+  // Add emoji to input
+  document.querySelectorAll('.emoji-option').forEach(btn => {
+    btn.addEventListener('click', () => {
+      chatMessageInput.value += btn.textContent;
+      chatMessageInput.focus();
+      emojiPicker.style.display = 'none';
+    });
+  });
+  
+  // Close emoji picker when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!emojiBtn.contains(e.target) && !emojiPicker.contains(e.target)) {
+      emojiPicker.style.display = 'none';
+    }
+  });
+  
+  // Add message to chat
+  function addMessage(author, text, isOwn = false) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `chat-message ${isOwn ? 'own' : ''}`;
+    
+    const avatar = document.createElement('div');
+    avatar.className = 'message-avatar';
+    avatar.textContent = author.charAt(0).toUpperCase();
+    
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'message-content';
+    
+    if (!isOwn) {
+      const authorDiv = document.createElement('div');
+      authorDiv.className = 'message-author';
+      authorDiv.textContent = author;
+      contentDiv.appendChild(authorDiv);
+    }
+    
+    const bubbleDiv = document.createElement('div');
+    bubbleDiv.className = 'message-bubble';
+    const p = document.createElement('p');
+    p.textContent = text;
+    bubbleDiv.appendChild(p);
+    contentDiv.appendChild(bubbleDiv);
+    
+    const timeDiv = document.createElement('div');
+    timeDiv.className = 'message-time';
+    timeDiv.textContent = new Date().toLocaleTimeString('en-US', { 
+      hour: 'numeric', 
+      minute: '2-digit',
+      hour12: true 
+    });
+    contentDiv.appendChild(timeDiv);
+    
+    messageDiv.appendChild(avatar);
+    messageDiv.appendChild(contentDiv);
+    
+    chatMessages.appendChild(messageDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    
+    messageCount++;
+  }
+  
+  // Add bot message
+  function addBotMessage(text) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'chat-message';
+    
+    const avatar = document.createElement('div');
+    avatar.className = 'message-avatar bot';
+    avatar.textContent = '🤖';
+    
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'message-content';
+    
+    const authorDiv = document.createElement('div');
+    authorDiv.className = 'message-author';
+    authorDiv.textContent = 'GrammarGuard Bot';
+    contentDiv.appendChild(authorDiv);
+    
+    const bubbleDiv = document.createElement('div');
+    bubbleDiv.className = 'message-bubble';
+    const p = document.createElement('p');
+    p.textContent = text;
+    bubbleDiv.appendChild(p);
+    contentDiv.appendChild(bubbleDiv);
+    
+    const timeDiv = document.createElement('div');
+    timeDiv.className = 'message-time';
+    timeDiv.textContent = new Date().toLocaleTimeString('en-US', { 
+      hour: 'numeric', 
+      minute: '2-digit',
+      hour12: true 
+    });
+    contentDiv.appendChild(timeDiv);
+    
+    messageDiv.appendChild(avatar);
+    messageDiv.appendChild(contentDiv);
+    
+    chatMessages.appendChild(messageDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+  
+  // Add system message
+  function addSystemMessage(text) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'chat-message system';
+    
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'message-content';
+    
+    const p = document.createElement('p');
+    p.textContent = text;
+    contentDiv.appendChild(p);
+    
+    messageDiv.appendChild(contentDiv);
+    chatMessages.appendChild(messageDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+  
+  // Typing indicator
+  let typingIndicatorElement = null;
+  
+  function showTypingIndicator() {
+    if (typingIndicatorElement) return;
+    
+    const messageDiv = document.createElement('div');
+    messageDiv.className = 'chat-message typing-indicator';
+    
+    const avatar = document.createElement('div');
+    avatar.className = 'message-avatar bot';
+    avatar.textContent = '🤖';
+    
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'message-content';
+    
+    const bubbleDiv = document.createElement('div');
+    bubbleDiv.className = 'message-bubble';
+    bubbleDiv.innerHTML = '<span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>';
+    contentDiv.appendChild(bubbleDiv);
+    
+    messageDiv.appendChild(avatar);
+    messageDiv.appendChild(contentDiv);
+    
+    chatMessages.appendChild(messageDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    
+    typingIndicatorElement = messageDiv;
+  }
+  
+  function hideTypingIndicator() {
+    if (typingIndicatorElement) {
+      typingIndicatorElement.remove();
+      typingIndicatorElement = null;
+    }
+  }
+  
+  // Simulate online users count changing
+  setInterval(() => {
+    const onlineCount = document.getElementById('onlineCount');
+    const current = parseInt(onlineCount.textContent);
+    const change = Math.random() > 0.5 ? 1 : -1;
+    const newCount = Math.max(8, Math.min(20, current + change));
+    onlineCount.textContent = newCount;
+  }, 15000);
+  
+  // Show notification badge after some time if chat not opened
+  setTimeout(() => {
+    if (!chatWidget.classList.contains('open')) {
+      chatNotificationBadge.classList.remove('hidden');
+    }
+  }, 10000);
+
   console.log('GrammarGuard website loaded successfully! ✓');
   console.log('🚀 Ready for downloads!');
   console.log('✨ Interactive features enabled!');
   console.log('📝 Forms and suggestion board ready!');
+  console.log('💬 Live chat widget ready!');
 });
 
