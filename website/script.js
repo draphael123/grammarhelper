@@ -400,7 +400,197 @@ document.addEventListener('DOMContentLoaded', () => {
     floatingDownload.style.transition = 'opacity 0.3s ease';
   }
 
+  // FAQ Accordion
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+    question.addEventListener('click', () => {
+      const isActive = item.classList.contains('active');
+      
+      // Close all FAQ items
+      faqItems.forEach(i => i.classList.remove('active'));
+      
+      // Open clicked item if it wasn't active
+      if (!isActive) {
+        item.classList.add('active');
+      }
+    });
+  });
+
+  // Interactive Demo
+  const liveEditor = document.getElementById('liveEditor');
+  const loadSampleBtn = document.getElementById('loadSample');
+  const clearTextBtn = document.getElementById('clearText');
+  const toggleErrorsBtn = document.getElementById('toggleErrors');
+  const errorsCountEl = document.getElementById('errorsCount');
+  const wordsCountEl = document.getElementById('wordsCount');
+  let errorsVisible = true;
+
+  const sampleText = "Their are many benefits to using GrammarGuard for you're writing needs. Its a great tool that helps catch alot of common mistakes. We recieved positive feedback from users who says it makes their writing better.  Weather your a student or professional,GrammarGuard can help you write more good.";
+
+  const grammarRules = [
+    { pattern: /\btheir\s+are\b/gi, type: 'grammar', message: 'Use "There are"' },
+    { pattern: /\byour\s+going\b/gi, type: 'grammar', message: 'Use "you\'re going"' },
+    { pattern: /\byou're\s+writing\b/gi, type: 'grammar', message: 'Use "your writing"' },
+    { pattern: /\bits\s+a\b/gi, type: 'grammar', message: 'Use "it\'s" (it is)' },
+    { pattern: /\balot\b/gi, type: 'spelling', message: 'Use "a lot"' },
+    { pattern: /\brecieved\b/gi, type: 'spelling', message: 'Use "received"' },
+    { pattern: /\bsays\b/gi, type: 'grammar', message: 'Use "say"' },
+    { pattern: /\bweather\b/gi, type: 'spelling', message: 'Use "whether"' },
+    { pattern: /,(\w)/g, type: 'spacing', message: 'Add space after comma' },
+    { pattern: /\s{2,}/g, type: 'spacing', message: 'Extra space' },
+    { pattern: /\bmore\s+good\b/gi, type: 'grammar', message: 'Use "better"' }
+  ];
+
+  function checkGrammar(text) {
+    const errors = [];
+    grammarRules.forEach(rule => {
+      let match;
+      while ((match = rule.pattern.exec(text)) !== null) {
+        errors.push({
+          start: match.index,
+          end: match.index + match[0].length,
+          text: match[0],
+          type: rule.type,
+          message: rule.message
+        });
+      }
+      rule.pattern.lastIndex = 0; // Reset regex
+    });
+    return errors;
+  }
+
+  function highlightErrors() {
+    if (!liveEditor) return;
+    
+    let text = liveEditor.textContent;
+    const errors = checkGrammar(text);
+    
+    if (!errorsVisible) {
+      liveEditor.textContent = text;
+      errorsCountEl.textContent = '0';
+      return;
+    }
+
+    // Sort errors by position (reverse) to replace from end to start
+    errors.sort((a, b) => b.start - a.start);
+    
+    // Create HTML with highlighted errors
+    let html = text;
+    errors.forEach(error => {
+      const before = html.substring(0, error.start);
+      const errorText = html.substring(error.start, error.end);
+      const after = html.substring(error.end);
+      html = before + `<span class="error-highlight" title="${error.message}">${errorText}</span>` + after;
+    });
+    
+    liveEditor.innerHTML = html;
+    errorsCountEl.textContent = errors.length;
+    
+    // Update word count
+    const wordCount = text.trim().split(/\s+/).filter(w => w.length > 0).length;
+    wordsCountEl.textContent = wordCount;
+  }
+
+  if (loadSampleBtn) {
+    loadSampleBtn.addEventListener('click', () => {
+      liveEditor.textContent = sampleText;
+      highlightErrors();
+    });
+  }
+
+  if (clearTextBtn) {
+    clearTextBtn.addEventListener('click', () => {
+      liveEditor.textContent = '';
+      errorsCountEl.textContent = '0';
+      wordsCountEl.textContent = '0';
+    });
+  }
+
+  if (toggleErrorsBtn) {
+    toggleErrorsBtn.addEventListener('click', () => {
+      errorsVisible = !errorsVisible;
+      document.getElementById('toggleText').textContent = errorsVisible ? 'Hide Errors' : 'Show Errors';
+      highlightErrors();
+    });
+  }
+
+  if (liveEditor) {
+    let debounceTimer;
+    liveEditor.addEventListener('input', () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        highlightErrors();
+      }, 500);
+    });
+  }
+
+  // Fetch GitHub Stars
+  async function fetchGitHubStars() {
+    try {
+      const response = await fetch('https://api.github.com/repos/draphael123/grammarhelper');
+      const data = await response.json();
+      const stars = data.stargazers_count || 0;
+      const starsEl = document.getElementById('githubStars');
+      if (starsEl) {
+        starsEl.textContent = `★ ${stars}`;
+      }
+    } catch (error) {
+      console.log('Could not fetch GitHub stars');
+      const starsEl = document.getElementById('githubStars');
+      if (starsEl) {
+        starsEl.textContent = '★ Star Us!';
+      }
+    }
+  }
+
+  fetchGitHubStars();
+
+  // Animate Social Proof Numbers
+  const proofNumbers = document.querySelectorAll('.proof-number');
+  const observerOptions = {
+    threshold: 0.5
+  };
+
+  const numberObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !entry.target.dataset.animated) {
+        const target = parseFloat(entry.target.dataset.target);
+        animateNumber(entry.target, target);
+        entry.target.dataset.animated = 'true';
+      }
+    });
+  }, observerOptions);
+
+  proofNumbers.forEach(num => numberObserver.observe(num));
+
+  function animateNumber(element, target) {
+    const duration = 2000;
+    const start = 0;
+    const increment = target / (duration / 16);
+    let current = start;
+
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+        current = target;
+        clearInterval(timer);
+      }
+
+      // Format number
+      let displayValue;
+      if (target >= 1000) {
+        displayValue = (current / 1000).toFixed(1) + 'K';
+      } else {
+        displayValue = Math.floor(current).toFixed(1);
+      }
+      
+      element.textContent = displayValue;
+    }, 16);
+  }
+
   console.log('GrammarGuard website loaded successfully! ✓');
   console.log('🚀 Ready for downloads!');
+  console.log('✨ Interactive features enabled!');
 });
 

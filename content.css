@@ -1,5 +1,17 @@
 /* GrammarGuard Styles */
 
+/* Yellow highlighting for potential changes */
+.grammar-guard-highlight {
+  background-color: rgba(245, 158, 11, 0.25);
+  padding: 2px 0;
+  border-radius: 2px;
+  transition: background-color 0.3s;
+}
+
+.grammar-guard-highlight:hover {
+  background-color: rgba(245, 158, 11, 0.4);
+}
+
 .grammar-guard-overlay {
   pointer-events: none;
   position: absolute;
@@ -53,6 +65,14 @@
   position: relative;
   cursor: pointer;
   border-bottom: 2px solid;
+  background-color: rgba(245, 158, 11, 0.25);
+  padding: 2px 0;
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+
+.grammar-guard-error:hover {
+  background-color: rgba(245, 158, 11, 0.4);
 }
 
 .grammar-guard-error.grammar-guard-spelling {
@@ -158,5 +178,50 @@
 
 [data-grammarguard="true"]:focus::after {
   opacity: 0.8;
+}
+
+/* Error indicator badge */
+.grammar-guard-indicator {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* Elements with errors */
+.grammar-guard-has-errors {
+  border-color: rgba(245, 158, 11, 0.5) !important;
+}
+
+/* Errors list styling */
+.grammar-guard-errors-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.grammar-guard-errors-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.grammar-guard-errors-list::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+.grammar-guard-errors-list::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Apply fix button hover */
+.apply-fix-btn:hover {
+  background: #059669 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
 }
 

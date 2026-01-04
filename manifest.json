@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "GrammarGuard - Writing Assistant",
-  "version": "1.0.0",
-  "description": "AI-powered writing assistant that checks grammar, spelling, and style in real-time",
+  "version": "1.1.0",
+  "description": "AI-powered writing assistant that checks grammar, spelling, and style in real-time across all websites including Slack, Gmail, and more",
   "permissions": [
     "activeTab",
     "storage",
