@@ -1,0 +1,59 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient circle -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="featherGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background circle with gradient -->
+  <circle cx="64" cy="64" r="58" fill="url(#bgGradient)" filter="url(#shadow)"/>
+  
+  <!-- Owl body (simplified) -->
+  <ellipse cx="64" cy="72" rx="32" ry="36" fill="#f8fafc"/>
+  
+  <!-- Owl head -->
+  <circle cx="64" cy="52" r="28" fill="#f8fafc"/>
+  
+  <!-- Eyes background (white circles) -->
+  <circle cx="54" cy="48" r="12" fill="white"/>
+  <circle cx="74" cy="48" r="12" fill="white"/>
+  
+  <!-- Eyes (with sparkle) -->
+  <circle cx="54" cy="48" r="8" fill="#1e293b"/>
+  <circle cx="74" cy="48" r="8" fill="#1e293b"/>
+  <circle cx="56" cy="46" r="3" fill="white"/>
+  <circle cx="76" cy="46" r="3" fill="white"/>
+  
+  <!-- Beak -->
+  <path d="M 64 56 L 60 62 L 68 62 Z" fill="#f59e0b"/>
+  
+  <!-- Feather tuft on top -->
+  <path d="M 58 32 Q 58 24 64 26 Q 70 24 70 32" fill="url(#featherGradient)"/>
+  
+  <!-- Wings -->
+  <ellipse cx="42" cy="76" rx="8" ry="16" fill="#e2e8f0" transform="rotate(-20 42 76)"/>
+  <ellipse cx="86" cy="76" rx="8" ry="16" fill="#e2e8f0" transform="rotate(20 86 76)"/>
+  
+  <!-- Checkmark (for grammar checking) -->
+  <path d="M 52 92 L 58 98 L 76 80" stroke="#10b981" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  
+  <!-- Sparkles around (gamification element) -->
+  <circle cx="24" cy="32" r="3" fill="#fbbf24" opacity="0.8"/>
+  <circle cx="104" cy="36" r="2" fill="#fbbf24" opacity="0.8"/>
+  <circle cx="32" cy="96" r="2.5" fill="#fbbf24" opacity="0.8"/>
+  <circle cx="96" cy="92" r="3" fill="#fbbf24" opacity="0.8"/>
+  
+  <!-- Star shapes for extra flair -->
+  <path d="M 20 44 L 21 46 L 23 46 L 21.5 47.5 L 22 50 L 20 48.5 L 18 50 L 18.5 47.5 L 17 46 L 19 46 Z" fill="#f59e0b" opacity="0.9"/>
+  <path d="M 108 48 L 109 50 L 111 50 L 109.5 51.5 L 110 54 L 108 52.5 L 106 54 L 106.5 51.5 L 105 50 L 107 50 Z" fill="#f59e0b" opacity="0.9"/>
+</svg>
+

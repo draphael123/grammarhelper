@@ -1,0 +1,40 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Modern Gradient Background -->
+  <defs>
+    <linearGradient id="modernGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#f5576c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ff6b6b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffd89b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#19547b;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="64" cy="64" r="56" fill="url(#modernGrad)"/>
+  
+  <!-- Large "G" letter (for GrammarGuard) -->
+  <text x="64" y="84" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="white" text-anchor="middle">G</text>
+  
+  <!-- Checkmark overlay -->
+  <path d="M 48 68 L 58 78 L 80 56" stroke="#10b981" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  
+  <!-- Level badge (gamification element) -->
+  <g transform="translate(88, 20)">
+    <circle r="16" fill="#fbbf24"/>
+    <text x="0" y="6" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">8</text>
+  </g>
+  
+  <!-- Streak flame -->
+  <g transform="translate(24, 24)">
+    <path d="M 0 12 Q -4 8 -2 4 Q 0 0 2 2 Q 4 -2 6 2 Q 8 6 6 10 Q 4 14 0 12 Z" fill="#f59e0b"/>
+    <path d="M 0 10 Q -2 8 -1 6 Q 0 4 1 5 Q 2 3 3 5 Q 4 7 3 9 Q 2 11 0 10 Z" fill="#fbbf24"/>
+  </g>
+  
+  <!-- Corner stars -->
+  <circle cx="104" cy="104" r="3" fill="white" opacity="0.8"/>
+  <circle cx="24" cy="104" r="2" fill="white" opacity="0.6"/>
+</svg>
+
