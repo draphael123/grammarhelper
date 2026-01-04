@@ -31,9 +31,9 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["language-detector.js", "filipino-rules.js", "content-enhanced.js"],
+      "js": ["filipino-rules.js", "content-simple.js"],
       "css": ["content.css"],
-      "run_at": "document_idle"
+      "run_at": "document_end"
     }
   ],
   "background": {
