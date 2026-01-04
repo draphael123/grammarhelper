@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About - GrammarGuard</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="enhancements.css">
+  <style>
+    .about-page {
+      max-width: 900px;
+      margin: 120px auto 80px;
+      padding: 0 20px;
+    }
+    
+    .about-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .about-header h1 {
+      font-size: 48px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 20px;
+    }
+    
+    .about-header p {
+      font-size: 20px;
+      color: #64748b;
+    }
+    
+    .about-section {
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+    
+    .about-section h2 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 20px;
+    }
+    
+    .about-section p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #64748b;
+      margin-bottom: 16px;
+    }
+    
+    .about-section ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .about-section li {
+      padding: 12px 0;
+      padding-left: 30px;
+      position: relative;
+      color: #64748b;
+    }
+    
+    .about-section li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #667eea;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    
+    .tech-badge {
+      padding: 8px 16px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="about-page">
+    <a href="index.html" class="back-link">← Back to Home</a>
+    
+    <div class="about-header">
+      <h1>About GrammarGuard</h1>
+      <p>Your privacy-first, free forever writing assistant</p>
+    </div>
+    
+    <div class="about-section">
+      <h2>🎯 Our Mission</h2>
+      <p>GrammarGuard was created to make professional writing assistance accessible to everyone, completely free and without compromising privacy.</p>
+      <p>We believe that powerful writing tools shouldn't cost $30/month or collect your personal data. That's why we built GrammarGuard as a free, open-source alternative that respects your privacy and works entirely offline.</p>
+    </div>
+    
+    <div class="about-section">
+      <h2>✨ What Makes Us Different</h2>
+      <ul>
+        <li><strong>100% Free Forever</strong> - No premium tiers, no subscriptions, no hidden costs</li>
+        <li><strong>Privacy First</strong> - All processing happens locally on your device, zero data collection</li>
+        <li><strong>Open Source</strong> - Transparent, auditable code on GitHub (MIT License)</li>
+        <li><strong>Bilingual Support</strong> - English and Filipino/Tagalog grammar checking</li>
+        <li><strong>Works Offline</strong> - No internet connection required</li>
+        <li><strong>No Tracking</strong> - No analytics, no cookies, no third-party scripts</li>
+        <li><strong>Gamification</strong> - 20+ achievements to make writing more engaging</li>
+      </ul>
+    </div>
+    
+    <div class="about-section">
+      <h2>🛠️ Technology Stack</h2>
+      <p>GrammarGuard is built with modern web technologies:</p>
+      <div class="tech-stack">
+        <span class="tech-badge">JavaScript</span>
+        <span class="tech-badge">Chrome Extensions API</span>
+        <span class="tech-badge">Manifest V3</span>
+        <span class="tech-badge">HTML5</span>
+        <span class="tech-badge">CSS3</span>
+        <span class="tech-badge">Regular Expressions</span>
+        <span class="tech-badge">Chrome Storage API</span>
+        <span class="tech-badge">Content Scripts</span>
+      </div>
+    </div>
+    
+    <div class="about-section">
+      <h2>📈 Roadmap</h2>
+      <p><strong>Completed:</strong></p>
+      <ul>
+        <li>Real-time grammar and spelling checking</li>
+        <li>English language support</li>
+        <li>Filipino/Tagalog language support</li>
+        <li>Gamification system with achievements</li>
+        <li>Writing statistics and analytics</li>
+        <li>Dark mode support</li>
+        <li>Works on all websites</li>
+      </ul>
+      
+      <p style="margin-top: 30px;"><strong>Coming Soon:</strong></p>
+      <ul>
+        <li>Firefox browser support</li>
+        <li>Spanish language support</li>
+        <li>Advanced style suggestions</li>
+        <li>Custom dictionary improvements</li>
+        <li>Community-driven grammar rules</li>
+        <li>More achievements and challenges</li>
+      </ul>
+    </div>
+    
+    <div class="about-section">
+      <h2>🤝 Contributing</h2>
+      <p>GrammarGuard is open source and we welcome contributions from the community!</p>
+      <p><strong>Ways to contribute:</strong></p>
+      <ul>
+        <li>Report bugs on GitHub</li>
+        <li>Suggest new features</li>
+        <li>Submit pull requests</li>
+        <li>Improve documentation</li>
+        <li>Add new grammar rules</li>
+        <li>Translate to other languages</li>
+        <li>Share with friends and colleagues</li>
+      </ul>
+      <p style="margin-top: 20px;">
+        <strong>GitHub:</strong> <a href="https://github.com/draphael123/grammarhelper" target="_blank" style="color: #667eea;">github.com/draphael123/grammarhelper</a>
+      </p>
+    </div>
+    
+    <div class="about-section">
+      <h2>📧 Contact</h2>
+      <p>Have questions, feedback, or want to get in touch?</p>
+      <ul>
+        <li><strong>Email:</strong> support@grammarguard.com</li>
+        <li><strong>GitHub Issues:</strong> Report bugs and request features</li>
+        <li><strong>Live Chat:</strong> Use the chat widget on our website</li>
+        <li><strong>Suggestion Board:</strong> Vote on feature requests</li>
+      </ul>
+    </div>
+    
+    <div class="about-section" style="text-align: center; background: linear-gradient(135deg, #f0f9ff 0%, #fef3c7 100%);">
+      <h2>💝 Made with Love</h2>
+      <p>GrammarGuard is built by developers who care about privacy, accessibility, and making great tools available to everyone.</p>
+      <p style="font-size: 20px; margin-top: 30px;">
+        <a href="index.html" class="btn btn-primary">Get Started Free</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>
+

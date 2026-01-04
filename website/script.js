@@ -1181,10 +1181,62 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, 10000);
 
+  // === DARK MODE TOGGLE ===
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  
+  // Load saved preference
+  const isDarkMode = localStorage.getItem('darkMode') === 'true';
+  if (isDarkMode) {
+    document.body.classList.add('dark-mode');
+    if (darkModeToggle) {
+      darkModeToggle.querySelector('.toggle-icon').textContent = '☀️';
+    }
+  }
+  
+  // Toggle handler
+  if (darkModeToggle) {
+    darkModeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      const isDark = document.body.classList.contains('dark-mode');
+      
+      // Update icon
+      darkModeToggle.querySelector('.toggle-icon').textContent = isDark ? '☀️' : '🌙';
+      
+      // Save preference
+      localStorage.setItem('darkMode', isDark);
+      
+      console.log(`Dark mode ${isDark ? 'enabled' : 'disabled'}`);
+    });
+  }
+
+  // === NEWSLETTER FORM HANDLING ===
+  const newsletterForm = document.getElementById('newsletterForm');
+  if (newsletterForm) {
+    newsletterForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const email = document.getElementById('newsletterEmail').value;
+      
+      // Simulate subscription (replace with actual API call)
+      console.log('Newsletter subscription:', email);
+      
+      // Show success message
+      document.getElementById('newsletterSuccess').style.display = 'block';
+      newsletterForm.style.display = 'none';
+      
+      // In production, integrate with:
+      // - Mailchimp
+      // - ConvertKit
+      // - Buttondown
+      // - Your own email service
+    });
+  }
+
   console.log('GrammarGuard website loaded successfully! ✓');
   console.log('🚀 Ready for downloads!');
   console.log('✨ Interactive features enabled!');
   console.log('📝 Forms and suggestion board ready!');
   console.log('💬 Live chat widget ready!');
+  console.log('📧 Newsletter signup ready!');
 });
 

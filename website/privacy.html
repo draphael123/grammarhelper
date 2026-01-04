@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy - GrammarGuard</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="enhancements.css">
+  <style>
+    .privacy-page {
+      max-width: 900px;
+      margin: 120px auto 80px;
+      padding: 0 20px;
+    }
+    
+    .privacy-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .privacy-header h1 {
+      font-size: 48px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 20px;
+    }
+    
+    .privacy-header p {
+      font-size: 18px;
+      color: #64748b;
+    }
+    
+    .privacy-section {
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+    
+    .privacy-section h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 20px;
+    }
+    
+    .privacy-section h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #1e293b;
+      margin-top: 30px;
+      margin-bottom: 12px;
+    }
+    
+    .privacy-section p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #64748b;
+      margin-bottom: 16px;
+    }
+    
+    .privacy-section ul {
+      list-style: disc;
+      padding-left: 30px;
+      margin: 16px 0;
+    }
+    
+    .privacy-section li {
+      padding: 8px 0;
+      color: #64748b;
+      line-height: 1.6;
+    }
+    
+    .highlight-box {
+      background: linear-gradient(135deg, #f0f9ff 0%, #fef3c7 100%);
+      border-left: 4px solid #667eea;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+    
+    .highlight-box strong {
+      color: #1e293b;
+    }
+    
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    
+    .back-link:hover {
+      text-decoration: underline;
+    }
+    
+    .last-updated {
+      text-align: center;
+      color: #94a3b8;
+      font-size: 14px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="privacy-page">
+    <a href="index.html" class="back-link">← Back to Home</a>
+    
+    <div class="privacy-header">
+      <h1>Privacy Policy</h1>
+      <p>Your privacy is our top priority</p>
+    </div>
+    
+    <div class="highlight-box">
+      <strong>TL;DR:</strong> GrammarGuard collects ZERO personal data. Everything runs locally on your device. We don't track you, we don't store your writing, and we don't have servers to collect your information. Your privacy is 100% protected.
+    </div>
+    
+    <div class="privacy-section">
+      <h2>1. Information We DON'T Collect</h2>
+      <p>Unlike most online services, GrammarGuard is designed to collect <strong>zero personal information</strong>. Here's what we explicitly do NOT collect:</p>
+      <ul>
+        <li>Your name, email, or personal information</li>
+        <li>The text you write or edit</li>
+        <li>Your browsing history</li>
+        <li>Your IP address</li>
+        <li>Cookies or tracking data</li>
+        <li>Usage analytics or telemetry</li>
+        <li>Device fingerprints</li>
+        <li>Location data</li>
+        <li>Any other personally identifiable information</li>
+      </ul>
+    </div>
+    
+    <div class="privacy-section">
+      <h2>2. How GrammarGuard Works</h2>
+      <p>GrammarGuard is a <strong>completely local, client-side application</strong>:</p>
+      <ul>
+        <li><strong>Local Processing:</strong> All grammar and spelling checking happens entirely on your device using JavaScript</li>
+        <li><strong>No Server Uploads:</strong> Your text never leaves your computer or uploads to any server</li>
+        <li><strong>Offline Functionality:</strong> Works completely offline without any internet connection</li>
+        <li><strong>Chrome Storage API:</strong> Settings and achievements are stored locally in your browser using Chrome's Storage API</li>
+        <li><strong>No External Requests:</strong> The extension makes zero network requests or API calls</li>
+      </ul>
+    </div>
+    
+    <div class="privacy-section">
+      <h2>3. Data Storage</h2>
+      <p>GrammarGuard stores some data locally on your device to provide functionality:</p>
+      
+      <h3>What We Store Locally:</h3>
+      <ul>
+        <li><strong>Extension Settings:</strong> Your preferences (dark mode, language selection, etc.)</li>
+        <li><strong>Custom Dictionary:</strong> Words you've added to your personal dictionary</li>
+        <li><strong>Achievements:</strong> Your writing stats, streak count, and unlocked achievements</li>
+        <li><strong>Writing Goals:</strong> Your personal daily word goals and progress</li>
+      </ul>
+      
+      <h3>Important Notes:</h3>
+      <ul>
+        <li>All data is stored using Chrome's local Storage API</li>
+        <li>Data never syncs to the cloud (unless you enable Chrome sync, which is controlled by Google, not us)</li>
+        <li>You can clear all data at any time from the extension settings</li>
+        <li>Uninstalling the extension removes all stored data</li>
+      </ul>
+    </div>
+    
+    <div class="privacy-section">
+      <h2>4. Permissions Explained</h2>
+      <p>GrammarGuard requests certain Chrome permissions. Here's exactly what each permission is used for:</p>
+      <ul>
+        <li><strong>activeTab:</strong> To check grammar on the page you're currently viewing</li>
+        <li><strong>storage:</strong> To save your settings and achievements locally</li>
+        <li><strong>contextMenus:</strong> To add right-click menu options</li>
+        <li><strong>notifications:</strong> To show achievement notifications (optional, can be disabled)</li>
+      </ul>
+      <p><strong>We do NOT request permission for:</strong></p>
+      <ul>
+        <li>Reading all your tabs or browsing history</li>
+        <li>Making network requests</li>
+        <li>Accessing your camera, microphone, or location</li>
+        <li>Reading files from your computer</li>
+      </ul>
+    </div>
+    
+    <div class="privacy-section">
+      <h2>5. Third-Party Services</h2>
+      <p>GrammarGuard does NOT integrate with any third-party services, analytics platforms, or advertising networks. We have:</p>
+      <ul>
+        <li>❌ No Google Analytics</li>
+        <li>❌ No advertising networks</li>
+        <li>❌ No social media tracking pixels</li>
+        <li>❌ No third-party scripts</li>
+        <li>❌ No cloud servers or databases</li>
+        <li>❌ No API endpoints that collect data</li>
+      </ul>
+      <p>The extension is completely self-contained.</p>
+    </div>
+    
+    <div class="privacy-section">
+      <h2>6. Website Privacy</h2>
+      <p>This website (grammarguard.vercel.app) is hosted on Vercel and follows similar privacy principles:</p>
+      <ul>
+        <li>We don't use cookies</li>
+        <li>We don't use analytics or tracking scripts</li>
+        <li>We don't collect visitor data</li>
+        <li>Vercel may collect basic server logs (IP addresses, user agents) for security and performance, but we don't have access to this data</li>
+        <li>The contact form and live chat are simulated (no actual data is sent anywhere)</li>
+      </ul>
+    </div>
+    
+    <div class="privacy-section">
+      <h2>7. Open Source Transparency</h2>
+      <p>GrammarGuard is <strong>100% open source</strong> with transparent code:</p>
+      <ul>
+        <li>Full source code available on GitHub: <a href="https://github.com/draphael123/grammarhelper" target="_blank" style="color: #667eea;">github.com/draphael123/grammarhelper</a></li>
+        <li>MIT License - free to use, modify, and audit</li>
+        <li>You can review every line of code to verify our privacy claims</li>
+        <li>Community-auditable for security and privacy</li>
+      </ul>
+    </div>
+    
+    <div class="privacy-section">
+      <h2>8. Your Rights</h2>
+      <p>Since we don't collect any personal data, there's nothing for us to access, share, or delete on our end. However, you have full control:</p>
+      <ul>
+        <li><strong>Right to Access:</strong> All your data is stored locally on your device - you can access it anytime through Chrome's Developer Tools</li>
+        <li><strong>Right to Delete:</strong> Clear all data from extension settings or by uninstalling</li>
+        <li><strong>Right to Export:</strong> Export your custom dictionary and settings from the extension</li>
+        <li><strong>Right to Opt-Out:</strong> Simply uninstall the extension if you choose not to use it</li>
+      </ul>
+    </div>
+    
+    <div class="privacy-section">
+      <h2>9. Children's Privacy</h2>
+      <p>GrammarGuard does not collect any personal information from anyone, including children under 13. Since we collect zero data, we are compliant with COPPA (Children's Online Privacy Protection Act) and similar regulations worldwide.</p>
+    </div>
+    
+    <div class="privacy-section">
+      <h2>10. International Users</h2>
+      <p>GrammarGuard can be used anywhere in the world. Since all processing happens locally on your device and we collect no data:</p>
+      <ul>
+        <li>GDPR Compliant (Europe)</li>
+        <li>CCPA Compliant (California)</li>
+        <li>PIPEDA Compliant (Canada)</li>
+        <li>Data Protection Act Compliant (UK)</li>
+        <li>Compliant with privacy laws worldwide</li>
+      </ul>
+    </div>
+    
+    <div class="privacy-section">
+      <h2>11. Changes to This Policy</h2>
+      <p>If we ever change our privacy practices, we will update this page and the version number in the extension. However, our core commitment will never change:</p>
+      <div class="highlight-box">
+        <strong>We will NEVER collect, store, or share your personal data or writing content.</strong>
+      </div>
+    </div>
+    
+    <div class="privacy-section">
+      <h2>12. Contact Us</h2>
+      <p>If you have any questions about this Privacy Policy, please:</p>
+      <ul>
+        <li>Open an issue on <a href="https://github.com/draphael123/grammarhelper" target="_blank" style="color: #667eea;">GitHub</a></li>
+        <li>Use the contact form on our website</li>
+        <li>Email: support@grammarguard.com</li>
+      </ul>
+      <p>We're committed to transparency and will happily answer any privacy concerns.</p>
+    </div>
+    
+    <div class="privacy-section" style="text-align: center; background: linear-gradient(135deg, #f0f9ff 0%, #fef3c7 100%);">
+      <h2>🔒 Privacy Guarantee</h2>
+      <p style="font-size: 18px; font-weight: 600; color: #1e293b;">
+        Your writing is yours. Your privacy is protected. Always.
+      </p>
+      <p style="font-size: 20px; margin-top: 30px;">
+        <a href="index.html" class="btn btn-primary">Get Started Free</a>
+      </p>
+    </div>
+    
+    <p class="last-updated">Last Updated: January 4, 2026</p>
+  </div>
+</body>
+</html>
+
