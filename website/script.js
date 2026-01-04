@@ -302,6 +302,105 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Floating download button visibility
+  const floatingDownload = document.getElementById('floatingDownload');
+  let lastScroll = 0;
+
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    // Show after scrolling 300px
+    if (currentScroll > 300) {
+      floatingDownload.style.display = 'block';
+      floatingDownload.style.opacity = '1';
+    } else {
+      floatingDownload.style.opacity = '0';
+      setTimeout(() => {
+        if (window.pageYOffset <= 300) {
+          floatingDownload.style.display = 'none';
+        }
+      }, 300);
+    }
+    
+    lastScroll = currentScroll;
+  });
+
+  // Track download clicks
+  const downloadButtons = document.querySelectorAll('a[download], a[href*="github.com"]');
+  downloadButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const isDownload = btn.hasAttribute('download');
+      console.log(isDownload ? '📥 Extension download initiated!' : '🔗 GitHub link clicked!');
+      
+      // Show thank you message for downloads
+      if (isDownload) {
+        showDownloadNotification();
+      }
+    });
+  });
+
+  function showDownloadNotification() {
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+      position: fixed;
+      top: 100px;
+      right: 30px;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: white;
+      padding: 20px 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(16, 185, 129, 0.4);
+      z-index: 10000;
+      font-weight: 600;
+      animation: slideIn 0.3s ease;
+    `;
+    notification.innerHTML = `
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+        <div>
+          <div style="font-size: 16px;">Download Started! 🎉</div>
+          <div style="font-size: 13px; opacity: 0.9; margin-top: 4px;">Follow installation guide below</div>
+        </div>
+      </div>
+    `;
+
+    // Add animation
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideIn {
+        from {
+          transform: translateX(400px);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+
+    document.body.appendChild(notification);
+
+    // Remove after 5 seconds
+    setTimeout(() => {
+      notification.style.animation = 'slideOut 0.3s ease';
+      notification.style.transform = 'translateX(400px)';
+      notification.style.opacity = '0';
+      setTimeout(() => notification.remove(), 300);
+    }, 5000);
+  }
+
+  // Initial hide for floating button
+  if (floatingDownload) {
+    floatingDownload.style.display = 'none';
+    floatingDownload.style.transition = 'opacity 0.3s ease';
+  }
+
   console.log('GrammarGuard website loaded successfully! ✓');
+  console.log('🚀 Ready for downloads!');
 });
 
