@@ -425,6 +425,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const errorsCountEl = document.getElementById('errorsCount');
   const wordsCountEl = document.getElementById('wordsCount');
   let errorsVisible = true;
+  
+  console.log('Demo initialized:', { liveEditor, loadSampleBtn, errorsCountEl, wordsCountEl });
 
   const sampleTexts = {
     english: "Their are many benefits to using GrammarGuard for you're writing needs. Its a great tool that helps catch alot of common mistakes. We recieved positive feedback from users who says it makes their writing better.  Weather your a student or professional,GrammarGuard can help you write more good.",
@@ -434,7 +436,10 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentLanguage = 'english';
 
   const englishRules = [
-    // Common misspellings
+    // Common misspellings and typos
+    { pattern: /\baas\b/gi, type: 'spelling', message: 'Use "as"' },
+    { pattern: /\baasas\b/gi, type: 'spelling', message: 'Unknown word - check spelling' },
+    { pattern: /\bcccc\b/gi, type: 'spelling', message: 'Unknown word - check spelling' },
     { pattern: /\bteh\b/gi, type: 'spelling', message: 'Use "the"' },
     { pattern: /\bthi\b/gi, type: 'spelling', message: 'Use "this"' },
     { pattern: /\bthsi\b/gi, type: 'spelling', message: 'Use "this"' },
@@ -464,7 +469,11 @@ document.addEventListener('DOMContentLoaded', () => {
     { pattern: /,(\w)/g, type: 'spacing', message: 'Add space after comma' },
     { pattern: /\s{2,}/g, type: 'spacing', message: 'Extra space' },
     { pattern: /\bmore\s+good\b/gi, type: 'grammar', message: 'Use "better"' },
-    { pattern: /(^|[.!?]\s+)([a-z])/g, type: 'capitalization', message: 'Capitalize first letter' }
+    { pattern: /(^|[.!?]\s+)([a-z])/g, type: 'capitalization', message: 'Capitalize first letter' },
+    // Detect words with 4+ repeated letters (likely typos)
+    { pattern: /\b\w*([a-z])\1{3,}\w*\b/gi, type: 'spelling', message: 'Possible typo - repeated letters' },
+    // Detect very short words that look like typos
+    { pattern: /\b([a-z])\1{2,}\b/gi, type: 'spelling', message: 'Possible typo' }
   ];
   
   const filipinoRules = [
@@ -548,7 +557,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const text = liveEditor.textContent || liveEditor.innerText || '';
     
     // Update word count
-    const wordCount = text.trim().split(/\s+/).filter(w => w.length > 0).length;
+    const words = text.trim().split(/\s+/).filter(w => w.length > 0);
+    const wordCount = text.trim() ? words.length : 0;
     if (wordsCountEl) wordsCountEl.textContent = wordCount;
     
     // If text is empty, reset
@@ -563,7 +573,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update error count
     if (errorsCountEl) errorsCountEl.textContent = errors.length;
     
-    if (!errorsVisible || errors.length === 0) {
+    console.log('Errors found:', errors.length, errors);
+    
+    // If no errors or errors are hidden, show plain text
+    if (errors.length === 0 || !errorsVisible) {
       liveEditor.innerHTML = text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
       return;
     }
@@ -571,13 +584,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Sort errors by position (reverse) to replace from end to start
     errors.sort((a, b) => b.start - a.start);
     
-    // Create HTML with highlighted errors
+    // Create HTML with highlighted errors - RED for errors
     let html = text;
     errors.forEach(error => {
       const before = html.substring(0, error.start);
       const errorText = html.substring(error.start, error.end);
       const after = html.substring(error.end);
-      html = before + `<mark class="error-highlight" title="${error.message}" style="background-color: rgba(245, 158, 11, 0.3); padding: 2px 4px; border-radius: 3px; cursor: help; border-bottom: 2px dotted #f59e0b;">${errorText}</mark>` + after;
+      // Red highlighting with solid red underline
+      html = before + `<mark class="error-highlight" title="${error.message}" style="background-color: rgba(239, 68, 68, 0.3); padding: 2px 4px; border-radius: 3px; cursor: help; border-bottom: 2px solid #ef4444;">${errorText}</mark>` + after;
     });
     
     liveEditor.innerHTML = html;
