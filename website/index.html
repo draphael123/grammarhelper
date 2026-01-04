@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GrammarGuard - Your AI Writing Assistant</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="nav-brand">
+        <svg width="40" height="40" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="14" fill="#27ae60"/>
+          <path d="M12 16l3 3 6-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>GrammarGuard</span>
+      </div>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#benefits">Benefits</a>
+        <a href="#install">Install</a>
+        <a href="#demo">Demo</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">
+          Write with Confidence
+          <span class="gradient-text">Everywhere</span>
+        </h1>
+        <p class="hero-subtitle">
+          GrammarGuard is your AI-powered writing assistant that checks grammar, spelling, 
+          and style in real-time across all your favorite websites.
+        </p>
+        <div class="hero-buttons">
+          <a href="#install" class="btn btn-primary">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Install Extension
+          </a>
+          <a href="#demo" class="btn btn-secondary">Watch Demo</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-value">100K+</div>
+            <div class="stat-label">Active Users</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">10M+</div>
+            <div class="stat-label">Corrections Made</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">4.9★</div>
+            <div class="stat-label">User Rating</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="extension-preview">
+          <div class="browser-chrome">
+            <div class="chrome-dots">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="chrome-bar">grammarguard.com</div>
+          </div>
+          <div class="preview-content">
+            <div class="text-example">
+              <p>Their are many benefits to using GrammarGuard...</p>
+              <div class="underline-demo spelling"></div>
+            </div>
+            <div class="tooltip-demo">
+              <div class="tooltip-header">Grammar Issue</div>
+              <div class="tooltip-body">
+                <strong>Suggestion:</strong> There are
+              </div>
+              <div class="tooltip-actions">
+                <button class="tooltip-btn accept">Accept</button>
+                <button class="tooltip-btn ignore">Ignore</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="features">
+    <div class="container">
+      <h2 class="section-title">Powerful Features</h2>
+      <p class="section-subtitle">Everything you need to write perfectly</p>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+              <path d="M2 17l10 5 10-5"></path>
+              <path d="M2 12l10 5 10-5"></path>
+            </svg>
+          </div>
+          <h3>Real-Time Checking</h3>
+          <p>Get instant feedback as you type. See errors highlighted immediately with smart suggestions.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M12 6v6l4 2"></path>
+            </svg>
+          </div>
+          <h3>Works Everywhere</h3>
+          <p>From Gmail to Twitter, Google Docs to Facebook - GrammarGuard works on all your favorite sites.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+              <polyline points="10 9 9 9 8 9"></polyline>
+            </svg>
+          </div>
+          <h3>Grammar & Spelling</h3>
+          <p>Advanced algorithms detect grammar mistakes, spelling errors, and suggest better word choices.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+            </svg>
+          </div>
+          <h3>Style Suggestions</h3>
+          <p>Improve readability and tone with intelligent style recommendations tailored to your writing.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+          </div>
+          <h3>Privacy First</h3>
+          <p>Your text stays on your device. We never store or send your writing to external servers.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+            </svg>
+          </div>
+          <h3>Lightning Fast</h3>
+          <p>Optimized for performance. No lag, no delays - just instant, accurate corrections.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section id="benefits" class="benefits">
+    <div class="container">
+      <h2 class="section-title">Why Choose GrammarGuard?</h2>
+      
+      <div class="benefits-grid">
+        <div class="benefit-item">
+          <div class="benefit-number">01</div>
+          <h3>Save Time</h3>
+          <p>Stop second-guessing your writing. Get instant corrections and suggestions that help you write faster and more confidently.</p>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-number">02</div>
+          <h3>Professional Quality</h3>
+          <p>Make a great impression with error-free emails, documents, and messages. Perfect for work, school, and personal communication.</p>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-number">03</div>
+          <h3>Learn as You Write</h3>
+          <p>Each correction comes with an explanation, helping you understand and improve your writing skills over time.</p>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-number">04</div>
+          <h3>Boost Productivity</h3>
+          <p>Catch mistakes before you hit send. Avoid embarrassing typos and grammar errors that can cost you time and credibility.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Error Types Section -->
+  <section class="error-types">
+    <div class="container">
+      <h2 class="section-title">What We Check</h2>
+      <p class="section-subtitle">Comprehensive writing analysis</p>
+
+      <div class="error-types-grid">
+        <div class="error-type-card">
+          <div class="error-badge spelling">Spelling</div>
+          <h3>Spelling Errors</h3>
+          <ul>
+            <li>Misspelled words</li>
+            <li>Typos and fat-finger mistakes</li>
+            <li>Common confusions (their/there/they're)</li>
+            <li>Homophones and sound-alikes</li>
+          </ul>
+          <div class="example">
+            <div class="example-wrong">❌ recieve, alot, definately</div>
+            <div class="example-right">✓ receive, a lot, definitely</div>
+          </div>
+        </div>
+
+        <div class="error-type-card">
+          <div class="error-badge grammar">Grammar</div>
+          <h3>Grammar Mistakes</h3>
+          <ul>
+            <li>Subject-verb agreement</li>
+            <li>Incorrect word usage</li>
+            <li>Sentence structure issues</li>
+            <li>Verb tense errors</li>
+          </ul>
+          <div class="example">
+            <div class="example-wrong">❌ Your going to the store</div>
+            <div class="example-right">✓ You're going to the store</div>
+          </div>
+        </div>
+
+        <div class="error-type-card">
+          <div class="error-badge style">Style & Clarity</div>
+          <h3>Style Improvements</h3>
+          <ul>
+            <li>Punctuation placement</li>
+            <li>Capitalization rules</li>
+            <li>Spacing issues</li>
+            <li>Readability enhancements</li>
+          </ul>
+          <div class="example">
+            <div class="example-wrong">❌ hello,how are you?</div>
+            <div class="example-right">✓ Hello, how are you?</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Installation Section -->
+  <section id="install" class="installation">
+    <div class="container">
+      <h2 class="section-title">Easy Installation</h2>
+      <p class="section-subtitle">Get started in less than 2 minutes</p>
+
+      <div class="install-steps">
+        <div class="install-step">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>Download the Extension</h3>
+            <p>Click the button below to download the GrammarGuard extension package.</p>
+            <button class="btn btn-primary">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Download Extension
+            </button>
+          </div>
+        </div>
+
+        <div class="install-step">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>Open Chrome Extensions</h3>
+            <p>In Google Chrome, navigate to <code>chrome://extensions</code> or click the puzzle icon and select "Manage Extensions".</p>
+          </div>
+        </div>
+
+        <div class="install-step">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>Enable Developer Mode</h3>
+            <p>Toggle the "Developer mode" switch in the top-right corner of the Extensions page.</p>
+          </div>
+        </div>
+
+        <div class="install-step">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h3>Load the Extension</h3>
+            <p>Click "Load unpacked" and select the GrammarGuard folder you downloaded. That's it!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="install-note">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="16" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12.01" y2="8"></line>
+        </svg>
+        <div>
+          <strong>Alternative Installation:</strong> You can also install from the Chrome Web Store once we're published there. 
+          For now, follow the manual installation steps above.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Demo Section -->
+  <section id="demo" class="demo-section">
+    <div class="container">
+      <h2 class="section-title">See It In Action</h2>
+      <p class="section-subtitle">Watch how GrammarGuard helps you write better</p>
+
+      <div class="demo-container">
+        <div class="demo-browser">
+          <div class="browser-header">
+            <div class="browser-buttons">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="browser-url">example.com - Compose Email</div>
+          </div>
+          <div class="demo-content">
+            <div class="demo-email">
+              <div class="email-field">
+                <label>To:</label>
+                <input type="text" value="john@example.com" readonly>
+              </div>
+              <div class="email-field">
+                <label>Subject:</label>
+                <input type="text" value="Project Update" readonly>
+              </div>
+              <div class="email-body">
+                <p>Hi John,</p>
+                <p>
+                  <span class="demo-error" data-type="spelling">Their</span> are a few updates on the project. 
+                  <span class="demo-error" data-type="grammar">Your</span> going to be happy with the progress. 
+                  We <span class="demo-error" data-type="spelling">recieved</span> positive feedback from the client.
+                </p>
+                <p>Let me know if you have any questions.</p>
+                <p>Best,<br>Sarah</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="demo-explanation">
+          <h3>GrammarGuard Detects:</h3>
+          <div class="demo-errors">
+            <div class="demo-error-item">
+              <span class="error-indicator spelling"></span>
+              <div>
+                <strong>Spelling Error</strong>
+                <p>"recieved" → "received"</p>
+              </div>
+            </div>
+            <div class="demo-error-item">
+              <span class="error-indicator grammar"></span>
+              <div>
+                <strong>Grammar Mistake</strong>
+                <p>"Your going" → "You're going"</p>
+              </div>
+            </div>
+            <div class="demo-error-item">
+              <span class="error-indicator spelling"></span>
+              <div>
+                <strong>Word Confusion</strong>
+                <p>"Their are" → "There are"</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <div class="container">
+      <h2 class="section-title">Loved by Users Worldwide</h2>
+      
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>"GrammarGuard has become an essential tool for my daily writing. It catches mistakes I would have never noticed!"</p>
+          <div class="testimonial-author">
+            <strong>Sarah Johnson</strong>
+            <span>Content Writer</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>"As a non-native English speaker, this extension has been a game-changer. My emails are now professional and error-free."</p>
+          <div class="testimonial-author">
+            <strong>Carlos Rodriguez</strong>
+            <span>Business Analyst</span>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>"Simple, fast, and incredibly accurate. Best grammar checker I've used, and it works everywhere!"</p>
+          <div class="testimonial-author">
+            <strong>Emily Chen</strong>
+            <span>Marketing Manager</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Ready to Write Better?</h2>
+      <p>Join thousands of users who write with confidence using GrammarGuard</p>
+      <a href="#install" class="btn btn-primary btn-large">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        Install GrammarGuard Now
+      </a>
+      <p class="cta-note">Free to use • No credit card required • Works everywhere</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <svg width="40" height="40" viewBox="0 0 32 32" fill="none">
+            <circle cx="16" cy="16" r="14" fill="#27ae60"/>
+            <path d="M12 16l3 3 6-6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>GrammarGuard</span>
+          <p>Your AI-powered writing assistant</p>
+        </div>
+        
+        <div class="footer-links">
+          <div class="footer-column">
+            <h4>Product</h4>
+            <a href="#features">Features</a>
+            <a href="#benefits">Benefits</a>
+            <a href="#install">Installation</a>
+            <a href="#demo">Demo</a>
+          </div>
+          
+          <div class="footer-column">
+            <h4>Support</h4>
+            <a href="#">Help Center</a>
+            <a href="#">Contact Us</a>
+            <a href="#">FAQ</a>
+            <a href="#">Report Bug</a>
+          </div>
+          
+          <div class="footer-column">
+            <h4>Legal</h4>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Cookie Policy</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2026 GrammarGuard. All rights reserved.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Twitter">𝕏</a>
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="GitHub">★</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+

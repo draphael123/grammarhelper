@@ -1,0 +1,121 @@
+╔══════════════════════════════════════════════════════════════╗
+║          GrammarGuard - Quick Start Guide                    ║
+╚══════════════════════════════════════════════════════════════╝
+
+📦 INSTALLATION (3 minutes)
+────────────────────────────────────────────────────────────────
+
+1. Convert Icons (Important!)
+   • Open: icons/convert-icons.html in your browser
+   • Download all 3 PNG files (16px, 48px, 128px)
+   • Save them in the icons/ folder
+
+2. Install Extension
+   • Open Chrome and go to: chrome://extensions/
+   • Enable "Developer mode" (top-right toggle)
+   • Click "Load unpacked"
+   • Select this folder
+   • Done! ✓
+
+3. Test It
+   • Go to any website (Gmail, Twitter, etc.)
+   • Click a text field
+   • Type: "Their are alot of mistakes hear"
+   • Watch errors get underlined!
+   • Click errors to fix them
+
+────────────────────────────────────────────────────────────────
+
+🎯 WHAT IT CHECKS
+────────────────────────────────────────────────────────────────
+
+✓ Spelling:     teh → the, recieve → receive
+✓ Grammar:      Your going → You're going
+✓ Confusion:    Their are → There are
+✓ Caps:         i am → I am
+✓ Spacing:      Double  spaces → Single spaces
+✓ Punctuation:  hello,how → hello, how
+
+────────────────────────────────────────────────────────────────
+
+🌐 WEBSITE
+────────────────────────────────────────────────────────────────
+
+Open: website/index.html
+
+Features:
+• Beautiful landing page
+• Feature showcase
+• Installation guide
+• Live demo
+• User testimonials
+
+────────────────────────────────────────────────────────────────
+
+📁 FILE STRUCTURE
+────────────────────────────────────────────────────────────────
+
+Extension Files:
+  manifest.json      - Extension configuration
+  content.js         - Main checking logic (1000+ lines)
+  content.css        - Error styling
+  background.js      - Background worker
+  popup.html/css/js  - Extension popup interface
+
+Website Files:
+  website/index.html - Promotional website
+  website/style.css  - Website styling
+  website/script.js  - Interactive features
+
+Icons:
+  icons/icon*.png    - Extension icons (3 sizes)
+  icons/convert-icons.html - Icon converter tool
+
+Documentation:
+  README.md          - Full documentation
+  INSTALL.md         - Detailed installation guide
+  QUICKSTART.txt     - This file
+
+────────────────────────────────────────────────────────────────
+
+🔧 TROUBLESHOOTING
+────────────────────────────────────────────────────────────────
+
+Extension not working?
+  → Refresh the webpage after installing
+  → Make sure you clicked INTO a text field
+  → Check that extension is enabled
+
+No icons showing?
+  → Convert SVG to PNG using icons/convert-icons.html
+  → Reload extension in chrome://extensions/
+
+Errors not detected?
+  → Type at least 3 characters
+  → Try common errors: "Your going to love this!"
+  → Check other extensions aren't interfering
+
+────────────────────────────────────────────────────────────────
+
+💡 TIPS
+────────────────────────────────────────────────────────────────
+
+• Click the extension icon to see stats
+• Toggle on/off with the popup switch
+• Works on Gmail, Twitter, Facebook, Google Docs, etc.
+• All checking happens locally (private!)
+• Lightweight and fast
+
+────────────────────────────────────────────────────────────────
+
+📚 MORE INFO
+────────────────────────────────────────────────────────────────
+
+README.md    - Complete documentation
+INSTALL.md   - Step-by-step installation
+website/     - Open index.html for beautiful demo site
+
+────────────────────────────────────────────────────────────────
+
+Enjoy writing with confidence! ✍️
+

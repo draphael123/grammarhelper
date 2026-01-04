@@ -1,0 +1,24 @@
+{
+  "name": "grammarguard",
+  "version": "1.0.0",
+  "description": "AI-powered writing assistant Chrome extension with promotional website",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd website && python -m http.server 8000",
+    "deploy": "vercel --prod"
+  },
+  "keywords": [
+    "grammar",
+    "spelling",
+    "chrome-extension",
+    "writing-assistant",
+    "grammarly-clone"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/draphael123/grammarhelper.git"
+  }
+}
+
